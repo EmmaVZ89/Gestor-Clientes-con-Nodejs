@@ -1,0 +1,1547 @@
+{
+  "listaClientes": [
+    {
+      "id": "468",
+      "nombre": "juana",
+      "dni": "",
+      "edad": "36",
+      "altura": "1.56",
+      "telefono": "2920412370",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "las grutas pichu leufu 350",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2021-08-08",
+          "peso": "72.4",
+          "pecho": "105",
+          "cintura": "99",
+          "ombligo": "106",
+          "cadera": "98",
+          "biceps": "31",
+          "muslos": "49",
+          "objetivo": "55"
+        },
+        {
+          "fecha": "2022-02-25",
+          "peso": "63.3",
+          "pecho": "95",
+          "cintura": "83",
+          "ombligo": "93",
+          "cadera": "90",
+          "biceps": "28",
+          "muslos": "46",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-18",
+          "peso": "62.4",
+          "pecho": "97",
+          "cintura": "94",
+          "ombligo": "92",
+          "cadera": "90",
+          "biceps": "28",
+          "muslos": "45",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-25",
+          "peso": "62.3",
+          "pecho": "97",
+          "cintura": "94",
+          "ombligo": "92",
+          "cadera": "90",
+          "biceps": "28",
+          "muslos": "45",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-01",
+          "peso": "63.2",
+          "pecho": "97",
+          "cintura": "84",
+          "ombligo": "92",
+          "cadera": "91",
+          "biceps": "28",
+          "muslos": "45",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-22",
+          "peso": "62.9",
+          "pecho": "97",
+          "cintura": "87",
+          "ombligo": "94",
+          "cadera": "91",
+          "biceps": "28",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-29",
+          "peso": "63.3",
+          "pecho": "97",
+          "cintura": "90",
+          "ombligo": "93",
+          "cadera": "90",
+          "biceps": "28",
+          "muslos": "45",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-05-06",
+          "peso": "63.3",
+          "pecho": "97",
+          "cintura": "86",
+          "ombligo": "93",
+          "cadera": "90",
+          "biceps": "28",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-03",
+          "peso": "63.3",
+          "pecho": "97",
+          "cintura": "86",
+          "ombligo": "91",
+          "cadera": "91",
+          "biceps": "28",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "63.4",
+          "pecho": "96",
+          "cintura": "86",
+          "ombligo": "90",
+          "cadera": "90",
+          "biceps": "28",
+          "muslos": "47",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "1369",
+      "nombre": "miguela ",
+      "dni": "",
+      "edad": "34",
+      "altura": "1.55",
+      "telefono": "1130839973",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "general pintos 1840",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2021-10-17",
+          "peso": "86.7",
+          "pecho": "104",
+          "cintura": "93",
+          "ombligo": "99",
+          "cadera": "119",
+          "biceps": "32",
+          "muslos": "55",
+          "objetivo": "54.5"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "74",
+          "pecho": "93",
+          "cintura": "84",
+          "ombligo": "89",
+          "cadera": "104",
+          "biceps": "29",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-19",
+          "peso": "74.9",
+          "pecho": "93",
+          "cintura": "84",
+          "ombligo": "89",
+          "cadera": "104",
+          "biceps": "29",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-25",
+          "peso": "73.5",
+          "pecho": "93",
+          "cintura": "84",
+          "ombligo": "87",
+          "cadera": "104",
+          "biceps": "23",
+          "muslos": "46",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-01",
+          "peso": "73.7",
+          "pecho": "93",
+          "cintura": "84",
+          "ombligo": "87",
+          "cadera": "104",
+          "biceps": "23",
+          "muslos": "46",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-08",
+          "peso": "73.1",
+          "pecho": "93",
+          "cintura": "84",
+          "ombligo": "87",
+          "cadera": "104",
+          "biceps": "23",
+          "muslos": "46",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-22",
+          "peso": "72.8",
+          "pecho": "94",
+          "cintura": "84",
+          "ombligo": "86",
+          "cadera": "99",
+          "biceps": "29",
+          "muslos": "46",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3067",
+      "nombre": "cecilia",
+      "dni": "",
+      "edad": "",
+      "altura": "1.51",
+      "telefono": "1160569514",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2021-12-11",
+          "peso": "59",
+          "pecho": "90",
+          "cintura": "87",
+          "ombligo": "94",
+          "cadera": "100",
+          "biceps": "29",
+          "muslos": "57",
+          "objetivo": "52.4"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "49",
+          "pecho": "80",
+          "cintura": "70",
+          "ombligo": "78",
+          "cadera": "78",
+          "biceps": "25",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-18",
+          "peso": "49",
+          "pecho": "80",
+          "cintura": "70",
+          "ombligo": "76",
+          "cadera": "89",
+          "biceps": "25",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-25",
+          "peso": "49",
+          "pecho": "80",
+          "cintura": "68",
+          "ombligo": "75",
+          "cadera": "89",
+          "biceps": "25",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-08",
+          "peso": "49",
+          "pecho": "82",
+          "cintura": "70",
+          "ombligo": "74",
+          "cadera": "90",
+          "biceps": "25",
+          "muslos": "38",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-22",
+          "peso": "50",
+          "pecho": "85",
+          "cintura": "72",
+          "ombligo": "82",
+          "cadera": "91",
+          "biceps": "25",
+          "muslos": "39",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "49",
+          "pecho": "80",
+          "cintura": "74",
+          "ombligo": "79",
+          "cadera": "90",
+          "biceps": "26",
+          "muslos": "39",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3394",
+      "nombre": "ino",
+      "dni": "",
+      "edad": "51",
+      "altura": "160",
+      "telefono": "1153792597",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2022-01-26",
+          "peso": "80",
+          "pecho": "109",
+          "cintura": "102",
+          "ombligo": "106",
+          "cadera": "97",
+          "biceps": "32",
+          "muslos": "44",
+          "objetivo": "60.4"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "71.5",
+          "pecho": "97",
+          "cintura": "93",
+          "ombligo": "96",
+          "cadera": "91",
+          "biceps": "28",
+          "muslos": "42",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-18",
+          "peso": "71",
+          "pecho": "95",
+          "cintura": "91",
+          "ombligo": "94",
+          "cadera": "90",
+          "biceps": "28",
+          "muslos": "42",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-25",
+          "peso": "70",
+          "pecho": "95",
+          "cintura": "91",
+          "ombligo": "92",
+          "cadera": "90",
+          "biceps": "27",
+          "muslos": "44",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-01",
+          "peso": "70",
+          "pecho": "92",
+          "cintura": "90",
+          "ombligo": "92",
+          "cadera": "89",
+          "biceps": "27",
+          "muslos": "44",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-08",
+          "peso": "70",
+          "pecho": "95",
+          "cintura": "91",
+          "ombligo": "92",
+          "cadera": "90",
+          "biceps": "27",
+          "muslos": "45",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-16",
+          "peso": "70",
+          "pecho": "94",
+          "cintura": "90",
+          "ombligo": "92",
+          "cadera": "90",
+          "biceps": "27",
+          "muslos": "44",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-29",
+          "peso": "70",
+          "pecho": "99",
+          "cintura": "90",
+          "ombligo": "57",
+          "cadera": "92",
+          "biceps": "28",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-05-09",
+          "peso": "69",
+          "pecho": "99",
+          "cintura": "90",
+          "ombligo": "97",
+          "cadera": "91",
+          "biceps": "28",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-03",
+          "peso": "71",
+          "pecho": "95",
+          "cintura": "91",
+          "ombligo": "92",
+          "cadera": "90",
+          "biceps": "29",
+          "muslos": "45",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "70",
+          "pecho": "95",
+          "cintura": "90",
+          "ombligo": "96",
+          "cadera": "91",
+          "biceps": "29",
+          "muslos": "47",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3387",
+      "nombre": "florencia ",
+      "dni": "",
+      "edad": "51",
+      "altura": "1.54",
+      "telefono": "1158535941",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2022-01-26",
+          "peso": "82",
+          "pecho": "113",
+          "cintura": "100",
+          "ombligo": "109",
+          "cadera": "110",
+          "biceps": "31",
+          "muslos": "53",
+          "objetivo": "54"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "79",
+          "pecho": "105",
+          "cintura": "96",
+          "ombligo": "103",
+          "cadera": "108",
+          "biceps": "30",
+          "muslos": "50",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-05",
+          "peso": "77",
+          "pecho": "108",
+          "cintura": "97",
+          "ombligo": "103",
+          "cadera": "105",
+          "biceps": "30",
+          "muslos": "54",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-03",
+          "peso": "74",
+          "pecho": "107",
+          "cintura": "93",
+          "ombligo": "99",
+          "cadera": "104",
+          "biceps": "28",
+          "muslos": "46",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "73",
+          "pecho": "107",
+          "cintura": "93",
+          "ombligo": "104",
+          "cadera": "103",
+          "biceps": "30",
+          "muslos": "45",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "2018",
+      "nombre": "belen",
+      "dni": "",
+      "edad": "29",
+      "altura": "1.67",
+      "telefono": "3413073599",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2022-02-18",
+          "peso": "81",
+          "pecho": "99",
+          "cintura": "82",
+          "ombligo": "95",
+          "cadera": "103",
+          "biceps": "33",
+          "muslos": "55",
+          "objetivo": "60.9"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "78",
+          "pecho": "89",
+          "cintura": "80",
+          "ombligo": "85",
+          "cadera": "95",
+          "biceps": "31",
+          "muslos": "53",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-18",
+          "peso": "77",
+          "pecho": "88",
+          "cintura": "80",
+          "ombligo": "83",
+          "cadera": "95",
+          "biceps": "31",
+          "muslos": "49",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-25",
+          "peso": "77",
+          "pecho": "88",
+          "cintura": "75",
+          "ombligo": "83",
+          "cadera": "92",
+          "biceps": "30",
+          "muslos": "49",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-01",
+          "peso": "76",
+          "pecho": "88",
+          "cintura": "73",
+          "ombligo": "83",
+          "cadera": "92",
+          "biceps": "29",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-08",
+          "peso": "76",
+          "pecho": "88",
+          "cintura": "73",
+          "ombligo": "83",
+          "cadera": "92",
+          "biceps": "29",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-16",
+          "peso": "74",
+          "pecho": "88",
+          "cintura": "73",
+          "ombligo": "80",
+          "cadera": "92",
+          "biceps": "29",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-22",
+          "peso": "74",
+          "pecho": "88",
+          "cintura": "73",
+          "ombligo": "80",
+          "cadera": "92",
+          "biceps": "29",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-29",
+          "peso": "74",
+          "pecho": "88",
+          "cintura": "73",
+          "ombligo": "80",
+          "cadera": "92",
+          "biceps": "29",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-03",
+          "peso": "73.3",
+          "pecho": "88",
+          "cintura": "75",
+          "ombligo": "70",
+          "cadera": "92",
+          "biceps": "29",
+          "muslos": "51",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "73.3",
+          "pecho": "88",
+          "cintura": "73",
+          "ombligo": "70",
+          "cadera": "92",
+          "biceps": "29",
+          "muslos": "51",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-07-02",
+          "peso": "72.1",
+          "pecho": "88",
+          "cintura": "73",
+          "ombligo": "70",
+          "cadera": "92",
+          "biceps": "29",
+          "muslos": "51",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3241",
+      "nombre": "carina",
+      "dni": "",
+      "edad": "39",
+      "altura": "160",
+      "telefono": "2944574697",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2022-02-08",
+          "peso": "76",
+          "pecho": "105",
+          "cintura": "87",
+          "ombligo": "98",
+          "cadera": "107",
+          "biceps": "29",
+          "muslos": "50",
+          "objetivo": "57.2"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "74",
+          "pecho": "102",
+          "cintura": "84",
+          "ombligo": "95",
+          "cadera": "102",
+          "biceps": "28",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-18",
+          "peso": "73.6",
+          "pecho": "101",
+          "cintura": "82",
+          "ombligo": "93",
+          "cadera": "101",
+          "biceps": "27",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-22",
+          "peso": "74.1",
+          "pecho": "100",
+          "cintura": "84",
+          "ombligo": "96",
+          "cadera": "103",
+          "biceps": "28",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "73.4",
+          "pecho": "100",
+          "cintura": "83",
+          "ombligo": "96",
+          "cadera": "102",
+          "biceps": "29",
+          "muslos": "46",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3101",
+      "nombre": "jesica",
+      "dni": "",
+      "edad": "36",
+      "altura": "1.63",
+      "telefono": "2944502772",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-02-24",
+          "peso": "74.6",
+          "pecho": "96",
+          "cintura": "85",
+          "ombligo": "95",
+          "cadera": "107",
+          "biceps": "33",
+          "muslos": "62",
+          "objetivo": "58.8"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "70",
+          "pecho": "92",
+          "cintura": "81",
+          "ombligo": "91",
+          "cadera": "106",
+          "biceps": "31",
+          "muslos": "58",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-18",
+          "peso": "72.3",
+          "pecho": "92",
+          "cintura": "79",
+          "ombligo": "89",
+          "cadera": "106",
+          "biceps": "31",
+          "muslos": "58",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-22",
+          "peso": "74.1",
+          "pecho": "",
+          "cintura": "",
+          "ombligo": "",
+          "cadera": "",
+          "biceps": "",
+          "muslos": "",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3571",
+      "nombre": "yanina",
+      "dni": "",
+      "edad": "33",
+      "altura": "1.50",
+      "telefono": "2954743330",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-02-23",
+          "peso": "75.4",
+          "pecho": "100",
+          "cintura": "96",
+          "ombligo": "104",
+          "cadera": "115",
+          "biceps": "31",
+          "muslos": "51",
+          "objetivo": "51.8"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "71",
+          "pecho": "99",
+          "cintura": "92",
+          "ombligo": "99",
+          "cadera": "111",
+          "biceps": "31",
+          "muslos": "50",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-18",
+          "peso": "69.500",
+          "pecho": "97",
+          "cintura": "90",
+          "ombligo": "96",
+          "cadera": "109",
+          "biceps": "29",
+          "muslos": "49",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-25",
+          "peso": "68",
+          "pecho": "96",
+          "cintura": "89",
+          "ombligo": "95",
+          "cadera": "108",
+          "biceps": "30",
+          "muslos": "50",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3595",
+      "nombre": "celia",
+      "dni": "",
+      "edad": "51",
+      "altura": "1.53",
+      "telefono": "1130150015",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-02-28",
+          "peso": "73.5",
+          "pecho": "108",
+          "cintura": "97",
+          "ombligo": "105",
+          "cadera": "110",
+          "biceps": "29",
+          "muslos": "46",
+          "objetivo": "53.5"
+        },
+        {
+          "fecha": "2022-03-11",
+          "peso": "72.2",
+          "pecho": "102",
+          "cintura": "93",
+          "ombligo": "103",
+          "cadera": "102",
+          "biceps": "29",
+          "muslos": "46",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-26",
+          "peso": "72.1",
+          "pecho": "102",
+          "cintura": "94",
+          "ombligo": "103",
+          "cadera": "103",
+          "biceps": "29",
+          "muslos": "45",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "794",
+      "nombre": "fernanda",
+      "dni": "",
+      "edad": "28",
+      "altura": "165",
+      "telefono": "2996319190",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-03-02",
+          "peso": "118.5",
+          "pecho": "128",
+          "cintura": "116.5",
+          "ombligo": "136.5",
+          "cadera": "130",
+          "biceps": "44",
+          "muslos": "66",
+          "objetivo": "59.8"
+        },
+        {
+          "fecha": "2022-03-18",
+          "peso": "118",
+          "pecho": "127.2",
+          "cintura": "116",
+          "ombligo": "136",
+          "cadera": "130",
+          "biceps": "42",
+          "muslos": "66",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-01",
+          "peso": "118",
+          "pecho": "120",
+          "cintura": "",
+          "ombligo": "115",
+          "cadera": "130",
+          "biceps": "42",
+          "muslos": "65",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3697",
+      "nombre": "carina r",
+      "dni": "",
+      "edad": "46",
+      "altura": "1.63",
+      "telefono": "1136066592",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-02-23",
+          "peso": "73.5",
+          "pecho": "100",
+          "cintura": "99",
+          "ombligo": "105",
+          "cadera": "115",
+          "biceps": "30",
+          "muslos": "65",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3651",
+      "nombre": "silvia",
+      "dni": "",
+      "edad": "50",
+      "altura": "1.52",
+      "telefono": "1162004696",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "basualdo 689 v luzuriaga 1754",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-03-17",
+          "peso": "75",
+          "pecho": "106",
+          "cintura": "93",
+          "ombligo": "105",
+          "cadera": "118",
+          "biceps": "34",
+          "muslos": "58",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "i502",
+      "nombre": "fani ",
+      "dni": "",
+      "edad": "35",
+      "altura": "1.62",
+      "telefono": "+1 514 436064",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2022-03-07",
+          "peso": "80.8",
+          "pecho": "43",
+          "cintura": "36",
+          "ombligo": "40",
+          "cadera": "43.5",
+          "biceps": "12.5",
+          "muslos": "25",
+          "objetivo": "58.2"
+        },
+        {
+          "fecha": "2022-03-12",
+          "peso": "78.3",
+          "pecho": "41",
+          "cintura": "33",
+          "ombligo": "37",
+          "cadera": "43",
+          "biceps": "13",
+          "muslos": "22",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-03-25",
+          "peso": "78.3",
+          "pecho": "40",
+          "cintura": "34",
+          "ombligo": "36",
+          "cadera": "43",
+          "biceps": "12",
+          "muslos": "24",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-02",
+          "peso": "77.1",
+          "pecho": "22",
+          "cintura": "33",
+          "ombligo": "36",
+          "cadera": "42",
+          "biceps": "12",
+          "muslos": "24",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-08",
+          "peso": "76.8",
+          "pecho": "40",
+          "cintura": "33",
+          "ombligo": "36",
+          "cadera": "43",
+          "biceps": "13",
+          "muslos": "24",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-16",
+          "peso": "76.3",
+          "pecho": "40",
+          "cintura": "32",
+          "ombligo": "35",
+          "cadera": "42",
+          "biceps": "15",
+          "muslos": "24",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-29",
+          "peso": "76.2",
+          "pecho": "40",
+          "cintura": "34",
+          "ombligo": "36",
+          "cadera": "43",
+          "biceps": "12",
+          "muslos": "24",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-05-09",
+          "peso": "75.8",
+          "pecho": "39",
+          "cintura": "32",
+          "ombligo": "36",
+          "cadera": "41",
+          "biceps": "10",
+          "muslos": "",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "75.5",
+          "pecho": "40",
+          "cintura": "34",
+          "ombligo": "38",
+          "cadera": "42",
+          "biceps": "13",
+          "muslos": "22",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "2060",
+      "nombre": "jessica",
+      "dni": "",
+      "edad": "35",
+      "altura": "1.62",
+      "telefono": "2920708359",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "alvarado 876 rio negro san antonio oeste ",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-03-18",
+          "peso": "83",
+          "pecho": "100",
+          "cintura": "96",
+          "ombligo": "109",
+          "cadera": "114",
+          "biceps": "35",
+          "muslos": "48",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-01",
+          "peso": "82.2",
+          "pecho": "98",
+          "cintura": "95",
+          "ombligo": "108",
+          "cadera": "114",
+          "biceps": "35",
+          "muslos": "48",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3612",
+      "nombre": "macarena",
+      "dni": "",
+      "edad": "22",
+      "altura": "1.56",
+      "telefono": "2954838667",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-03-18",
+          "peso": "78.9",
+          "pecho": "105",
+          "cintura": "115",
+          "ombligo": "109",
+          "cadera": "115",
+          "biceps": "33",
+          "muslos": "51",
+          "objetivo": "58"
+        }
+      ]
+    },
+    {
+      "id": "2019",
+      "nombre": "mariela ",
+      "dni": "",
+      "edad": "43",
+      "altura": "1.60",
+      "telefono": "93764108375",
+      "facebook": "",
+      "instagram": "",
+      "direccion": "monte grande alem 1429",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-03-30",
+          "peso": "97.1",
+          "pecho": "119",
+          "cintura": "102",
+          "ombligo": "104",
+          "cadera": "124",
+          "biceps": "42",
+          "muslos": "69",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-08",
+          "peso": "95.2",
+          "pecho": "119",
+          "cintura": "102",
+          "ombligo": "104",
+          "cadera": "124",
+          "biceps": "41",
+          "muslos": "68",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-22",
+          "peso": "96.3",
+          "pecho": "117",
+          "cintura": "99",
+          "ombligo": "103",
+          "cadera": "123",
+          "biceps": "41",
+          "muslos": "66",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-29",
+          "peso": "95.4",
+          "pecho": "113",
+          "cintura": "98",
+          "ombligo": "99",
+          "cadera": "121",
+          "biceps": "41",
+          "muslos": "66",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-05-06",
+          "peso": "93.3",
+          "pecho": "113",
+          "cintura": "98",
+          "ombligo": "99",
+          "cadera": "121",
+          "biceps": "40",
+          "muslos": "64",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3769",
+      "nombre": "yanina ",
+      "dni": "",
+      "edad": "34",
+      "altura": "",
+      "telefono": "2966311869",
+      "facebook": "24/3/88",
+      "instagram": "",
+      "direccion": "catamarca 992",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-04-06",
+          "peso": "98",
+          "pecho": "116",
+          "cintura": "105",
+          "ombligo": "",
+          "cadera": "121",
+          "biceps": "31",
+          "muslos": "55",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3632",
+      "nombre": "silvana",
+      "dni": "",
+      "edad": "43",
+      "altura": "1.58",
+      "telefono": "2966334850",
+      "facebook": "29/05/78",
+      "instagram": "",
+      "direccion": "jose ingenieros 1315",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2022-04-05",
+          "peso": "71.5",
+          "pecho": "100",
+          "cintura": "91",
+          "ombligo": "99",
+          "cadera": "105",
+          "biceps": "26",
+          "muslos": "40",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-08",
+          "peso": "67.9",
+          "pecho": "99",
+          "cintura": "86",
+          "ombligo": "94",
+          "cadera": "102",
+          "biceps": "26",
+          "muslos": "38",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-16",
+          "peso": "67.4",
+          "pecho": "98",
+          "cintura": "84",
+          "ombligo": "88",
+          "cadera": "99",
+          "biceps": "26",
+          "muslos": "38",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-22",
+          "peso": "67",
+          "pecho": "98",
+          "cintura": "84",
+          "ombligo": "90",
+          "cadera": "99",
+          "biceps": "25",
+          "muslos": "38",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-29",
+          "peso": "66.5",
+          "pecho": "97",
+          "cintura": "84",
+          "ombligo": "90",
+          "cadera": "99",
+          "biceps": "25",
+          "muslos": "38",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-05-06",
+          "peso": "64.9",
+          "pecho": "97",
+          "cintura": "83",
+          "ombligo": "89",
+          "cadera": "99",
+          "biceps": "24",
+          "muslos": "37",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-03",
+          "peso": "63.6",
+          "pecho": "95",
+          "cintura": "82",
+          "ombligo": "87",
+          "cadera": "98",
+          "biceps": "24",
+          "muslos": "36",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "62.7",
+          "pecho": "95",
+          "cintura": "80",
+          "ombligo": "87",
+          "cadera": "95",
+          "biceps": "24",
+          "muslos": "36",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-07-02",
+          "peso": "61.3",
+          "pecho": "94",
+          "cintura": "79",
+          "ombligo": "83",
+          "cadera": "93",
+          "biceps": "23",
+          "muslos": "36",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3764",
+      "nombre": "carolina  muñoz ",
+      "dni": "",
+      "edad": "37",
+      "altura": "1.60",
+      "telefono": "92966486137",
+      "facebook": "",
+      "instagram": "05/02/85",
+      "direccion": "ayres argentino manzna 280p 27 calle 59",
+      "estado": false,
+      "control": [
+        {
+          "fecha": "2022-04-24",
+          "peso": "73.1",
+          "pecho": "104",
+          "cintura": "91",
+          "ombligo": "97",
+          "cadera": "96.5",
+          "biceps": "31",
+          "muslos": "45",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-04-30",
+          "peso": "70.9",
+          "pecho": "104",
+          "cintura": "95",
+          "ombligo": "99",
+          "cadera": "99",
+          "biceps": "31",
+          "muslos": "46",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-05-06",
+          "peso": "70.3",
+          "pecho": "103",
+          "cintura": "89.5",
+          "ombligo": "97.5",
+          "cadera": "98",
+          "biceps": "31",
+          "muslos": "45",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "i  95",
+      "nombre": "ambar arce fuente",
+      "dni": "",
+      "edad": "32",
+      "altura": "154",
+      "telefono": "56957585192",
+      "facebook": "",
+      "instagram": "19/06/1989",
+      "direccion": "iquique 1100000",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2022-05-03",
+          "peso": "73.8",
+          "pecho": "107",
+          "cintura": "91",
+          "ombligo": "99",
+          "cadera": "104",
+          "biceps": "33",
+          "muslos": "63",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-03",
+          "peso": "68.7",
+          "pecho": "99",
+          "cintura": "81",
+          "ombligo": "94",
+          "cadera": "97",
+          "biceps": "31",
+          "muslos": "58",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-10",
+          "peso": "68.7",
+          "pecho": "98",
+          "cintura": "81",
+          "ombligo": "94",
+          "cadera": "97",
+          "biceps": "30",
+          "muslos": "59",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-07-02",
+          "peso": "67.7",
+          "pecho": "98",
+          "cintura": "81",
+          "ombligo": "91",
+          "cadera": "97",
+          "biceps": "29",
+          "muslos": "58",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "3264",
+      "nombre": "belen barria",
+      "dni": "",
+      "edad": "32",
+      "altura": "1.62",
+      "telefono": "92966684748",
+      "facebook": "",
+      "instagram": "20021990",
+      "direccion": "jorgr avalos 1566",
+      "estado": true,
+      "control": [
+        {
+          "fecha": "2022-06-03",
+          "peso": "66.7",
+          "pecho": "102",
+          "cintura": "84",
+          "ombligo": "92",
+          "cadera": "105",
+          "biceps": "27",
+          "muslos": "47",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-06-03",
+          "peso": "64",
+          "pecho": "94",
+          "cintura": "82",
+          "ombligo": "84",
+          "cadera": "102",
+          "biceps": "25",
+          "muslos": "45",
+          "objetivo": ""
+        }
+      ]
+    },
+    {
+      "id": "2029",
+      "nombre": "veronica silguero ",
+      "dni": "",
+      "edad": "39",
+      "altura": "154",
+      "telefono": "3725464833",
+      "facebook": "",
+      "instagram": "120283",
+      "direccion": "ing silveyra 3304",
+      "control": [
+        {
+          "fecha": "2022-07-02",
+          "peso": "69.5",
+          "pecho": "95",
+          "cintura": "87",
+          "ombligo": "93",
+          "cadera": "103",
+          "biceps": "33",
+          "muslos": "62",
+          "objetivo": ""
+        },
+        {
+          "fecha": "2022-07-02",
+          "peso": "66.2",
+          "pecho": "92",
+          "cintura": "85",
+          "ombligo": "88",
+          "cadera": "102",
+          "biceps": "32",
+          "muslos": "60",
+          "objetivo": ""
+        }
+      ],
+      "estado": true
+    }
+  ]
+}

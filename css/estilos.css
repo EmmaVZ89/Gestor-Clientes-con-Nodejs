@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../assets/fondo.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+table tr:hover {
+  cursor: pointer;
+}
+
+.header-nav {
+  background-color: red;
+}
+
+.tituloListado {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 3px 3px 3px black;
+}
+
+.table {
+  box-shadow: 10px 10px 10px black;
+}
+
+#contenedor-modal {
+  background-image: url("../assets/fondo-des.jpg");
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+legend,
+h5 {
+  color: white;
+  text-shadow: 2px 2px 4px black;
+}
+
+.input-form {
+  display: inline-block;
+  margin-left: 1rem;
+  width: 20rem;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.input-form:hover {
+  box-shadow: 2px 2px 10px aqua;
+  transition: box-shadow 0.5s;
+}
+
+.btn-crud-contenedor {
+  background-image: url("../assets/fondo-des.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-radius: 1rem;
+}
+
+.dropControl {
+  text-align: end;
+  margin-bottom: 1rem;
+  padding-right: 4rem;
+}
+
+.dropUl {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.li-control {
+  text-align: center;
+}
+
+.li-control:hover {
+  cursor: pointer;
+}
+
+.bg-modal-control {
+  background-image: url("../assets/control-des.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+tr:nth-child(odd){
+  background: rgba(0, 0, 0, 0.9);
+  text-shadow: 0.5px 0.5px black;
+  color: white;
+}
+
+tr:nth-child(even){
+  background: rgba(95, 94, 94, 0.9);
+  text-shadow: 0.5px 0.5px black;
+  color: white;
+}
+
+.tr-table:hover td {
+  background-color: rgba(102, 255, 0, 0.7);
+  color: black;
+}
+
+#th-table {
+  color: greenyellow;
+  text-shadow: 1px 1px rgb(66, 65, 65);
+}

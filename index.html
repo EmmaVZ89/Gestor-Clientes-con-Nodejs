@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <link rel="stylesheet" href="./css/titulo.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/script.js" type="module" defer></script>
+    <script src="./js/titulo.js" defer></script>
+    <title>Clientes</title>
+  </head>
+  <body>
+    <header id="header-nav">
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark"
+        style="z-index: 1000"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">GESTOR DE CLIENTES</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="mx-auto"></div>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  href="https://www.herbalife.com.ar/" target="_blank"
+                  >Herbalife</a
+                >
+              </li>
+              <!-- <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Clases
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Nutrición</a></li>
+                  <li><a class="dropdown-item" href="#">Doctor</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="#">Certificación</a></li>
+                </ul>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="word">
+        <span>H</span>
+        <span>O</span>
+        <span>L</span>
+        <span>A</span>
+        <span> </span>
+        <span> </span>
+        <span> </span>
+        <span> </span>
+        <span>S</span>
+        <span>O</span>
+        <span>L</span>
+        <span>E</span>
+        <span>!</span>
+      </div>
+
+      <h2 class="tituloListado">Listado de Clientes</h2>
+      <div class="container">
+        <div class="row">
+          <div class="col contenedorTabla"></div>
+          <div id="spinner"></div>
+        </div>
+      </div>
+
+      <div class="container btn-crud-contenedor">
+        <button
+          id="btn-ficha"
+          type="button"
+          class="mt-5 mx-5 btn btn-info btn-crud"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Ver ficha de un cliente."
+        >
+          Ver Ficha
+        </button>
+        <button
+          id="btn-crear"
+          type="button"
+          class="mt-5 mx-5 btn btn-primary btn-crud"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Agregar un nuevo cliente."
+        >
+          Agregar
+        </button>
+        <button
+          id="btn-modificar"
+          type="button"
+          class="mt-5 mx-5 btn btn-success btn-crud"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Modificar datos de un cliente."
+        >
+          Modificar
+        </button>
+        <button
+          id="btn-eliminar"
+          type="button"
+          class="mt-5 mx-5 btn btn-danger btn-crud"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Eliminar un cliente."
+        >
+          Eliminar
+        </button>
+      </div>
+
+      <!-- TODO EL FORM EN UN MODAL-->
+      <div
+        class="modal fade"
+        id="miModal"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        aria-hidden="true"
+        aria-labelledby="modalTitle"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+        >
+          <div class="modal-content" id="contenedor-modal">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitle">Agregar Nuevo Cliente</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <!-- <div class="spinner-border spinner-border-lg" rele="status"
+                style="position: absolute; left: 50%; top: 50vh; z-index: 1000; width: 5rem; height: 5rem;">
+                </div>   -->
+
+                <fieldset class="container">
+                  <legend>Datos Personales</legend>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="txtNumeroCliente"
+                      name="numeroCliente"
+                      placeholder="N° de Cliente"
+                      required
+                    />
+                    <label class="" for="txtNumeroCliente"
+                      >N° de Cliente
+                    </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="txtNombre"
+                      name="nombre"
+                      placeholder="Nombre"
+                      required
+                    />
+                    <label for="txtNombre">Nombre </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="txtDNI"
+                      name="dni"
+                      placeholder="DNI"
+                    />
+                    <label for="txtDNI">DNI </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtEdad"
+                      name="edad"
+                      placeholder="Edad"
+                    />
+                    <label for="txtEdad">Edad </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtAltura"
+                      name="altura"
+                      step="0.01"
+                      placeholder="Altura"
+                    />
+                    <label for="txtAltura">Altura </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="txtTelefono"
+                      name="telefono"
+                      placeholder="Whatsapp"
+                      required
+                    />
+                    <label for="txtTelefono">N° de Telefono </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="txtFacebook"
+                      name="facebook"
+                      placeholder="Facebook"
+                    />
+                    <label for="txtFacebook">Facebook </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="txtInstagram"
+                      name="instagram"
+                      placeholder="Instagram"
+                    />
+                    <label for="txtInstagram">Instagram </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="txtDireccion"
+                      name="direccion"
+                      placeholder="Direccion"
+                    />
+                    <label for="txtDireccion">Dirección </label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="container">
+                  <legend>Controles</legend>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="date"
+                      id="txtFecha"
+                      name="fecha"
+                      value=""
+                      placeholder="fecha"
+                      required
+                    />
+                    <label for="txtFecha">Fecha </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtPeso"
+                      name="peso"
+                      step="0.1"
+                      placeholder="Peso"
+                    />
+                    <label for="txtPeso">Peso </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtPecho"
+                      name="pecho"
+                      step="0.1"
+                      placeholder="Pecho"
+                    />
+                    <label for="txtPecho">Pecho </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtCintura"
+                      name="cintura"
+                      step="0.1"
+                      placeholder="Cintura"
+                    />
+                    <label for="txtCintura">Cintura </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtOmbligo"
+                      name="ombligo"
+                      step="0.1"
+                      placeholder="Ombligo"
+                    />
+                    <label for="txtOmbligo">Ombligo </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtCadera"
+                      name="cadera"
+                      step="0.1"
+                      placeholder="Cadera"
+                    />
+                    <label for="txtCadera">Cadera </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtBiceps"
+                      name="biceps"
+                      step="0.1"
+                      placeholder="Biceps"
+                    />
+                    <label for="txtBiceps">Biceps </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtMuslo"
+                      name="muslo"
+                      step="0.1"
+                      placeholder="Muslos"
+                    />
+                    <label for="txtMuslo">Muslos </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="txtObjetivoIMC"
+                      name="objetivo"
+                      step="0.1"
+                      placeholder="Objetivo IMC"
+                    />
+                    <label for="txtObjetivoIMC">Objetivo IMC </label>
+                  </div>
+                </fieldset>
+                <div class="modal-footer">
+                  <button id="btn-form" type="submit" class="btn btn-primary">
+                    Guardar
+                  </button>
+                  <button
+                    id="btn-form-cancel"
+                    type="button"
+                    class="btn btn-secondary"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--  MODAL DE CONTROLES -->
+      <div
+        class="modal fade"
+        id="modalControles"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        aria-labelledby="modalTitle"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+        >
+          <div class="modal-content bg-modal-control">
+            <div class="modal-header">
+              <h5 class="modal-title">Menu de Controles</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="form-controls">
+                <div class="container dropControl">
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-warning dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Controles
+                    </button>
+                    <ul
+                      id="listaControles"
+                      class="dropdown-menu dropUl"
+                      aria-labelledby="dropdownMenuButton1"
+                    ></ul>
+                  </div>
+                </div>
+
+                <div class="container">
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="numeroCliente"
+                      placeholder="N° de Cliente"
+                      required
+                      disabled
+                    />
+                    <label class="" for="txtNumeroCliente"
+                      >N° de Cliente
+                    </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="nombre"
+                      placeholder="Nombre"
+                      required
+                      disabled
+                    />
+                    <label for="txtNombre">Nombre </label>
+                  </div>
+                </div>
+
+                <div class="container">
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="date"
+                      name="fecha"
+                      value=""
+                      placeholder="fecha"
+                      required
+                    />
+                    <label for="txtFecha">Fecha </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="peso"
+                      step="0.1"
+                      placeholder="Peso"
+                    />
+                    <label for="txtPeso">Peso </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="pecho"
+                      step="0.1"
+                      placeholder="Pecho"
+                    />
+                    <label for="txtPecho">Pecho </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="cintura"
+                      step="0.1"
+                      placeholder="Cintura"
+                    />
+                    <label for="txtCintura">Cintura </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="ombligo"
+                      step="0.1"
+                      placeholder="Ombligo"
+                    />
+                    <label for="txtOmbligo">Ombligo </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="cadera"
+                      step="0.1"
+                      placeholder="Cadera"
+                    />
+                    <label for="txtCadera">Cadera </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="biceps"
+                      step="0.1"
+                      placeholder="Biceps"
+                    />
+                    <label for="txtBiceps">Biceps </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="muslo"
+                      step="0.1"
+                      placeholder="Muslos"
+                      disabled
+                    />
+                    <label for="txtMuslo">Muslos </label>
+                  </div>
+
+                  <div class="form-floating mb-3 input-form">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="objetivo"
+                      step="0.1"
+                      placeholder="Objetivo IMC"
+                    />
+                    <label for="txtObjetivoIMC">Objetivo IMC </label>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                  <div>
+                    <button
+                      id="btn-controles-progreso"
+                      type="button"
+                      class="btn btn-info"
+                    >
+                      Ver Progreso
+                    </button>
+                  </div>
+
+                  <div>
+                    <button
+                      id="btn-controles-agregar"
+                      type="submit"
+                      class="btn btn-primary"
+                    >
+                      Agregar
+                    </button>
+
+                    <button
+                      id="btn-controles-modificar"
+                      type="submit"
+                      class="btn btn-success"
+                    >
+                      Modificar
+                    </button>
+
+                    <button
+                      id="btn-controles-eliminar"
+                      type="submit"
+                      class="btn btn-danger"
+                    >
+                      Eliminar
+                    </button>
+                    <button
+                      id="btn-controles-cancel"
+                      type="button"
+                      class="btn btn-secondary"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
