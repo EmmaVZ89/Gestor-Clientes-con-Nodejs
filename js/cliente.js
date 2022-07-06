@@ -1,6 +1,7 @@
 class Cliente {
-  constructor(id, nombre, dni, edad, altura, telefono, facebook, instagram, direccion, control, estado) {
+  constructor(id, id_control, nombre, dni, edad, altura, telefono, facebook, instagram, direccion, control, estado) {
     this.id = id;
+    this.id_control = id_control;
     this.nombre = nombre;
     this.dni = dni;
     this.edad = edad;

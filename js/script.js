@@ -122,10 +122,12 @@ $btnControlCancel.addEventListener("click", () => {
 // EVENTOS BOTONES -----------------------------------------------------------------------------------
 
 // EVENTOS PANTALLA Y FORMULARIOS --------------------------------------------------------------------
+let flagDesactivar = false;
 window.addEventListener("click", (e) => {
   if (e.target.matches("td")) {
     let respuesta = confirm("¿ Desea Activar o Desactivar el cliente ?");
     if (respuesta == false) {
+      flagDesactivar = false;
       $btnModificar.disabled = false;
       $btnDelete.disabled = false;
       $btnFicha.disabled = false;
@@ -139,6 +141,7 @@ window.addEventListener("click", (e) => {
       uploadFormCRUD(cliente);
       uploadFormControl(cliente);
     } else {
+      flagDesactivar = true;
       let id = e.target.parentElement.dataset.id;
       cliente = listaClientes.find((c) => c.id.toString() === id);
       controles = listaControles.filter((control) => {
@@ -203,7 +206,8 @@ $formularioCRUD.addEventListener("submit", (e) => {
     }
   }
 
-  const cliente = new Cliente(
+  const clienteCRUD = new Cliente(
+    numeroCliente.value,
     numeroCliente.value,
     nombre.value,
     dni.value,
@@ -217,11 +221,19 @@ $formularioCRUD.addEventListener("submit", (e) => {
   );
 
   if (!lookForClient(listaClientes, numeroCliente.value) && $btnForm.innerHTML === "Guardar") {
-    // if ($btnForm.innerHTML === "Guardar") {
-    cliente.estado = 1;
-    createCliente(cliente);
+    clienteCRUD.estado = 1;
+    createCliente(clienteCRUD);
   } else if ($btnForm.innerHTML === "Modificar") {
-    updateCliente(cliente);
+    if (!flagDesactivar) {
+      clienteCRUD.estado = 1;
+    }
+    let index = listaClientes.findIndex((c) => c.id == clienteCRUD.id);
+    let indexControl = listaControles.findIndex(
+      (c) => c.id == clienteCRUD.id && c.fecha == clienteCRUD.control[0].fecha
+    );
+    listaControles[indexControl] = clienteCRUD.control[0];
+    listaClientes[index] = clienteCRUD;
+    updateCliente(clienteCRUD);
   } else {
     deleteCliente(parseInt($formularioCRUD.numeroCliente.value));
   }
@@ -251,11 +263,13 @@ $formularioControl.addEventListener("submit", (e) => {
 
   if (idSubmitter === "btn-controles-agregar") {
     cliente.control.push(control);
+    listaControles.push(control);
     createControl(control);
-    updateCliente(cliente);
     resetFormControls();
   } else if (idSubmitter === "btn-controles-modificar") {
     if (index !== -1) {
+      let indexControl = listaControles.findIndex((c) => c.id == control.id && c.fecha == control.fecha);
+      listaControles[indexControl] = control;
       cliente.control[index] = control;
       updateCliente(cliente);
       resetFormControls();
@@ -263,9 +277,10 @@ $formularioControl.addEventListener("submit", (e) => {
   } else if (idSubmitter === "btn-controles-eliminar") {
     if (index !== -1) {
       let controlToDelete = cliente.control[index];
+      let indexControl = listaControles.findIndex((c) => c.id == control.id && c.fecha == control.fecha);
       cliente.control.splice(index, 1);
+      listaControles.splice(indexControl, 1);
       deleteControl(controlToDelete);
-      updateCliente(cliente);
       resetFormControls();
     }
   }
@@ -292,16 +307,6 @@ async function getClientes() {
     console.error(error);
   } finally {
     clearDivSpinner();
-  }
-}
-
-async function getCliente(id) {
-  try {
-    const { data } = await axios(URL + "/" + id);
-    console.log("GET: ", data);
-    return data;
-  } catch (error) {
-    console.error(error);
   }
 }
 
@@ -338,13 +343,11 @@ async function deleteCliente(id) {
 }
 
 // CRUD CLIENTE **************************************************************************************
+
 // CRUD CONTROL **************************************************************************************
 async function createControl(nuevoControl) {
   try {
     const { data } = await axios.post(URL + "agregarControl", nuevoControl);
-    // updateTable(listaClientes);
-    // resetForm();
-    // console.log("CREATE: ", data);
   } catch (error) {
     console.error(error);
   }
@@ -364,9 +367,7 @@ async function getControles() {
 
 async function deleteControl(control) {
   try {
-    resetForm();
     const { data } = await axios.post(URL + "eliminarControl", control);
-    updateTable(listaClientes);
   } catch (error) {
     console.error(error);
   }
