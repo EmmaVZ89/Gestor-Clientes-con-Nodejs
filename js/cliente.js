@@ -15,7 +15,8 @@ class Cliente {
 }
 
 class Control {
-  constructor(fecha, peso, pecho, cintura, ombligo, cadera, biceps, muslos, objetivo) {
+  constructor(id, fecha, peso, pecho, cintura, ombligo, cadera, biceps, muslos, objetivo) {
+    this.id = id;
     this.fecha = fecha;
     this.peso = peso;
     this.pecho = pecho;

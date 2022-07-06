@@ -6,14 +6,11 @@ const URL = "http://localhost:2022/";
 
 const $divSpinner = document.getElementById("spinner");
 
-let listaClientes =  await getClientes();
+let listaClientes = await getClientes();
+let listaControles = await getControles();
+
 const $divTable = document.querySelector(".contenedorTabla");
 updateTable();
-
-// setTimeout(() => {
-//   console.log(listaClientes);
-//   updateTable();
-// }, 3000);
 
 const actualDate = new Date();
 const date = document.querySelector("#txtFecha");
@@ -128,22 +125,30 @@ $btnControlCancel.addEventListener("click", () => {
 window.addEventListener("click", (e) => {
   if (e.target.matches("td")) {
     let respuesta = confirm("¿ Desea Activar o Desactivar el cliente ?");
-    if(respuesta == false) {
+    if (respuesta == false) {
       $btnModificar.disabled = false;
       $btnDelete.disabled = false;
       $btnFicha.disabled = false;
       let id = e.target.parentElement.dataset.id;
       cliente = listaClientes.find((c) => c.id.toString() === id);
-      controles = cliente.control;
+      // controles = cliente.control;
+      controles = listaControles.filter((control) => {
+        return control.id == cliente.id;
+      });
+      cliente.control = controles;
       uploadFormCRUD(cliente);
-      uploadFormControl(cliente);  
+      uploadFormControl(cliente);
     } else {
       let id = e.target.parentElement.dataset.id;
       cliente = listaClientes.find((c) => c.id.toString() === id);
-      if(cliente.estado) {
-        cliente.estado = false;
+      controles = listaControles.filter((control) => {
+        return control.id == cliente.id;
+      });
+      cliente.control = controles;
+      if (cliente.estado) {
+        cliente.estado = 0;
       } else {
-        cliente.estado = true;
+        cliente.estado = 1;
       }
       updateCliente(cliente);
     }
@@ -174,6 +179,7 @@ $formularioCRUD.addEventListener("submit", (e) => {
   } = $formularioCRUD;
 
   const control = new Control(
+    numeroCliente.value,
     fecha.value,
     peso.value,
     pecho.value,
@@ -210,9 +216,9 @@ $formularioCRUD.addEventListener("submit", (e) => {
     controles
   );
 
-  // if (!lookForClient(listaClientes, numeroCliente.value) && $btnForm.innerHTML === "Guardar") {
-    if ($btnForm.innerHTML === "Guardar") {
-    cliente.estado = true;
+  if (!lookForClient(listaClientes, numeroCliente.value) && $btnForm.innerHTML === "Guardar") {
+    // if ($btnForm.innerHTML === "Guardar") {
+    cliente.estado = 1;
     createCliente(cliente);
   } else if ($btnForm.innerHTML === "Modificar") {
     updateCliente(cliente);
@@ -228,6 +234,7 @@ $formularioControl.addEventListener("submit", (e) => {
   const { fecha, peso, pecho, cintura, ombligo, cadera, biceps, muslo, objetivo } = $formularioControl;
 
   const control = new Control(
+    cliente.id,
     fecha.value,
     peso.value,
     pecho.value,
@@ -244,6 +251,7 @@ $formularioControl.addEventListener("submit", (e) => {
 
   if (idSubmitter === "btn-controles-agregar") {
     cliente.control.push(control);
+    createControl(control);
     updateCliente(cliente);
     resetFormControls();
   } else if (idSubmitter === "btn-controles-modificar") {
@@ -254,7 +262,9 @@ $formularioControl.addEventListener("submit", (e) => {
     }
   } else if (idSubmitter === "btn-controles-eliminar") {
     if (index !== -1) {
+      let controlToDelete = cliente.control[index];
       cliente.control.splice(index, 1);
+      deleteControl(controlToDelete);
       updateCliente(cliente);
       resetFormControls();
     }
@@ -276,8 +286,7 @@ $ulControl.addEventListener("click", (e) => {
 async function getClientes() {
   $divSpinner.appendChild(getSpinner());
   try {
-    const { data } = await axios.get(URL+"listarClientes");
-    console.log(data);
+    const { data } = await axios.get(URL + "listarClientes");
     return data;
   } catch (error) {
     console.error(error);
@@ -285,7 +294,7 @@ async function getClientes() {
     clearDivSpinner();
   }
 }
- 
+
 async function getCliente(id) {
   try {
     const { data } = await axios(URL + "/" + id);
@@ -298,10 +307,10 @@ async function getCliente(id) {
 
 async function createCliente(nuevoCliente) {
   try {
-    const { data } = await axios.post(URL+"agregarCliente", nuevoCliente);
+    const { data } = await axios.post(URL + "agregarCliente", nuevoCliente);
     updateTable(listaClientes);
     resetForm();
-    console.log("CREATE: ", data);
+    // console.log("CREATE: ", data);
   } catch (error) {
     console.error(error);
   }
@@ -310,9 +319,8 @@ async function createCliente(nuevoCliente) {
 async function updateCliente(clienteToEdit) {
   try {
     resetForm();
-    const { data } = await axios.put(URL + "/" + clienteToEdit.id, clienteToEdit);
+    const { data } = await axios.post(URL + "modificarCliente", clienteToEdit);
     updateTable(listaClientes);
-    console.log("UPDATE: ", data);
     return data;
   } catch (error) {
     console.error(error);
@@ -322,15 +330,49 @@ async function updateCliente(clienteToEdit) {
 async function deleteCliente(id) {
   try {
     resetForm();
-    const { data } = await axios.delete(URL + "/" + id);
+    const { data } = await axios.post(URL + "eliminarCliente", { id: id });
     updateTable(listaClientes);
-    console.log("DELETE: ", data);
   } catch (error) {
     console.error(error);
   }
 }
 
 // CRUD CLIENTE **************************************************************************************
+// CRUD CONTROL **************************************************************************************
+async function createControl(nuevoControl) {
+  try {
+    const { data } = await axios.post(URL + "agregarControl", nuevoControl);
+    // updateTable(listaClientes);
+    // resetForm();
+    // console.log("CREATE: ", data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getControles() {
+  $divSpinner.appendChild(getSpinner());
+  try {
+    const { data } = await axios.get(URL + "listarControles");
+    return data;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    clearDivSpinner();
+  }
+}
+
+async function deleteControl(control) {
+  try {
+    resetForm();
+    const { data } = await axios.post(URL + "eliminarControl", control);
+    updateTable(listaClientes);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// CRUD CONTROL **************************************************************************************
 
 // FUNCIONES PARA CARGA Y RESETEO DE FORMULARIOS -----------------------------------------------------
 

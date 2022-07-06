@@ -5,10 +5,10 @@ export default function createTable(array) {
     return a.nombre.localeCompare(b.nombre);
   })
   array.sort(function(a, b) {
-    if(a.estado == false && b.estado == true) {
+    if(a.estado == 0 && b.estado == 1) {
       return 1;
     }
-    if(a.estado == true && b.estado == false) {
+    if(a.estado == 1 && b.estado == 0) {
       return -1;
     }
     return 0;
@@ -52,6 +52,7 @@ function createTbody(array) {
   array.forEach((element) => {
     const $tr = document.createElement("tr");
     $tr.classList.add("tr-table");
+    
     if(! element.estado) {
       $tr.style.opacity = "0.5";
     }
