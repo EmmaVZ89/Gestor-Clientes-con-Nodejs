@@ -34,7 +34,6 @@ function createThead() {
     if (
       key === "id" ||
       key === "nombre" ||
-      key === "edad" ||
       key === "telefono"
     ) {
       const $th = document.createElement("th");
@@ -43,6 +42,10 @@ function createThead() {
       $tr.appendChild($th);
     }
   }
+  let $th = document.createElement("th");
+  let $accion = document.createTextNode("ACTIVAR / DESACTIVAR");
+  $th.appendChild($accion);
+  $tr.appendChild($th);
   $thead.appendChild($tr);
   return $thead;
 }
@@ -63,7 +66,6 @@ function createTbody(array) {
       if (
         key === "id" ||
         key === "nombre" ||
-        key === "edad" ||
         key === "telefono"
       ) {
         const $td = document.createElement("td");
@@ -72,6 +74,9 @@ function createTbody(array) {
         $tr.appendChild($td);
       }
     }
+    let $td = document.createElement("td");
+    $td.innerHTML = `<button data-id="${element.id}" id='btnActivarDesactivar'> Activar / Desactivar </button>`;
+    $tr.appendChild($td);
     $tbody.appendChild($tr);
   });
   return $tbody;

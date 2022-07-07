@@ -14,16 +14,14 @@
     <link rel="stylesheet" href="./css/estilos.css" />
     <link rel="stylesheet" href="./css/titulo.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./js/script.js" type="module" defer></script>
     <script src="./js/titulo.js" defer></script>
     <title>Clientes</title>
   </head>
   <body>
     <header id="header-nav">
-      <nav
-        class="navbar navbar-expand-lg navbar-dark bg-dark"
-        style="z-index: 1000"
-      >
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 1000">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">GESTOR DE CLIENTES</a>
           <button
@@ -41,14 +39,10 @@
             <div class="mx-auto"></div>
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
-                  >Inicio</a
-                >
+                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  href="https://www.herbalife.com.ar/" target="_blank"
-                  >Herbalife</a
-                >
+                <a class="nav-link" href="https://www.herbalife.com.ar/" target="_blank">Herbalife</a>
               </li>
               <!-- <li class="nav-item dropdown">
                 <a
@@ -73,7 +67,6 @@
         </div>
       </nav>
     </header>
-
     <main>
       <div class="word">
         <span>H</span>
@@ -151,18 +144,11 @@
         aria-hidden="true"
         aria-labelledby="modalTitle"
       >
-        <div
-          class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
-        >
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content" id="contenedor-modal">
             <div class="modal-header">
               <h5 class="modal-title" id="modalTitle">Agregar Nuevo Cliente</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form>
@@ -182,9 +168,7 @@
                       placeholder="N° de Cliente"
                       required
                     />
-                    <label class="" for="txtNumeroCliente"
-                      >N° de Cliente
-                    </label>
+                    <label class="" for="txtNumeroCliente">N° de Cliente </label>
                   </div>
 
                   <div class="form-floating mb-3 input-form">
@@ -200,24 +184,12 @@
                   </div>
 
                   <div class="form-floating mb-3 input-form">
-                    <input
-                      class="form-control"
-                      type="text"
-                      id="txtDNI"
-                      name="dni"
-                      placeholder="DNI"
-                    />
+                    <input class="form-control" type="text" id="txtDNI" name="dni" placeholder="DNI" />
                     <label for="txtDNI">DNI </label>
                   </div>
 
                   <div class="form-floating mb-3 input-form">
-                    <input
-                      class="form-control"
-                      type="number"
-                      id="txtEdad"
-                      name="edad"
-                      placeholder="Edad"
-                    />
+                    <input class="form-control" type="number" id="txtEdad" name="edad" placeholder="Edad" />
                     <label for="txtEdad">Edad </label>
                   </div>
 
@@ -392,16 +364,8 @@
                   </div>
                 </fieldset>
                 <div class="modal-footer">
-                  <button id="btn-form" type="submit" class="btn btn-primary">
-                    Guardar
-                  </button>
-                  <button
-                    id="btn-form-cancel"
-                    type="button"
-                    class="btn btn-secondary"
-                  >
-                    Cancelar
-                  </button>
+                  <button id="btn-form" type="submit" class="btn btn-primary">Guardar</button>
+                  <button id="btn-form-cancel" type="button" class="btn btn-secondary">Cancelar</button>
                 </div>
               </form>
             </div>
@@ -417,18 +381,11 @@
         data-bs-backdrop="static"
         aria-labelledby="modalTitle"
       >
-        <div
-          class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
-        >
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content bg-modal-control">
             <div class="modal-header">
               <h5 class="modal-title">Menu de Controles</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form id="form-controls">
@@ -461,9 +418,7 @@
                       required
                       disabled
                     />
-                    <label class="" for="txtNumeroCliente"
-                      >N° de Cliente
-                    </label>
+                    <label class="" for="txtNumeroCliente">N° de Cliente </label>
                   </div>
 
                   <div class="form-floating mb-3 input-form">
@@ -493,24 +448,12 @@
                   </div>
 
                   <div class="form-floating mb-3 input-form">
-                    <input
-                      class="form-control"
-                      type="number"
-                      name="peso"
-                      step="0.1"
-                      placeholder="Peso"
-                    />
+                    <input class="form-control" type="number" name="peso" step="0.1" placeholder="Peso" />
                     <label for="txtPeso">Peso </label>
                   </div>
 
                   <div class="form-floating mb-3 input-form">
-                    <input
-                      class="form-control"
-                      type="number"
-                      name="pecho"
-                      step="0.1"
-                      placeholder="Pecho"
-                    />
+                    <input class="form-control" type="number" name="pecho" step="0.1" placeholder="Pecho" />
                     <label for="txtPecho">Pecho </label>
                   </div>
 
@@ -537,24 +480,12 @@
                   </div>
 
                   <div class="form-floating mb-3 input-form">
-                    <input
-                      class="form-control"
-                      type="number"
-                      name="cadera"
-                      step="0.1"
-                      placeholder="Cadera"
-                    />
+                    <input class="form-control" type="number" name="cadera" step="0.1" placeholder="Cadera" />
                     <label for="txtCadera">Cadera </label>
                   </div>
 
                   <div class="form-floating mb-3 input-form">
-                    <input
-                      class="form-control"
-                      type="number"
-                      name="biceps"
-                      step="0.1"
-                      placeholder="Biceps"
-                    />
+                    <input class="form-control" type="number" name="biceps" step="0.1" placeholder="Biceps" />
                     <label for="txtBiceps">Biceps </label>
                   </div>
 
@@ -580,52 +511,31 @@
                     />
                     <label for="txtObjetivoIMC">Objetivo IMC </label>
                   </div>
+                  <div id="alert-mensaje"></div>
                 </div>
+                <!-- <div id="alert-mensaje"></div> -->
                 <div class="modal-footer d-flex justify-content-between">
                   <div>
-                    <button
-                      id="btn-controles-progreso"
-                      type="button"
-                      class="btn btn-info"
-                    >
+                    <button id="btn-controles-progreso" type="button" class="btn btn-info">
                       Ver Progreso
                     </button>
                   </div>
 
                   <div>
-                    <button
-                      id="btn-controles-agregar"
-                      type="submit"
-                      class="btn btn-primary"
-                    >
-                      Agregar
-                    </button>
+                    <button id="btn-controles-agregar" type="submit" class="btn btn-primary">Agregar</button>
 
-                    <button
-                      id="btn-controles-modificar"
-                      type="submit"
-                      class="btn btn-success"
-                    >
+                    <button id="btn-controles-modificar" type="submit" class="btn btn-success">
                       Modificar
                     </button>
 
-                    <button
-                      id="btn-controles-eliminar"
-                      type="submit"
-                      class="btn btn-danger"
-                    >
-                      Eliminar
-                    </button>
-                    <button
-                      id="btn-controles-cancel"
-                      type="button"
-                      class="btn btn-secondary"
-                    >
+                    <button id="btn-controles-eliminar" type="submit" class="btn btn-danger">Eliminar</button>
+                    <button id="btn-controles-cancel" type="button" class="btn btn-secondary">
                       Cancelar
                     </button>
                   </div>
                 </div>
               </form>
+              
             </div>
           </div>
         </div>

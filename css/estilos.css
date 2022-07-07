@@ -124,3 +124,47 @@ tr:nth-child(even){
   color: greenyellow;
   text-shadow: 1px 1px rgb(66, 65, 65);
 }
+
+/* mensajes de confirmacion */
+.alert-mensaje {
+  position: absolute;
+  z-index: 2000;
+  left: 35%;
+  bottom: 10%;
+  animation-name: mensaje;
+  animation-duration: 5s;
+  animation-delay: 0;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  box-shadow: 4px 4px 8px black;
+}
+
+@keyframes mensaje {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#btnActivarDesactivar {
+  width: 100%;
+  background-color: greenyellow;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px white;
+  text-align: center;
+  padding: 5px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px white;
+}
+
+#btnActivarDesactivar:hover {
+  background-color: red;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  transition: background-color 0.5s, color 0.5s,text-shadow 0.5s;
+}

@@ -125,25 +125,46 @@ $btnControlCancel.addEventListener("click", () => {
 let flagDesactivar = false;
 window.addEventListener("click", (e) => {
   if (e.target.matches("td")) {
-    let respuesta = confirm("¿ Desea Activar o Desactivar el cliente ?");
-    if (respuesta == false) {
-      flagDesactivar = false;
-      $btnModificar.disabled = false;
-      $btnDelete.disabled = false;
-      $btnFicha.disabled = false;
-      let id = e.target.parentElement.dataset.id;
-      cliente = listaClientes.find((c) => c.id.toString() === id);
-      // controles = cliente.control;
-      controles = listaControles.filter((control) => {
-        return control.id == cliente.id;
-      });
-      cliente.control = controles;
-      uploadFormCRUD(cliente);
-      uploadFormControl(cliente);
-    } else {
-      flagDesactivar = true;
-      let id = e.target.parentElement.dataset.id;
-      cliente = listaClientes.find((c) => c.id.toString() === id);
+    flagDesactivar = false;
+    $btnModificar.disabled = false;
+    $btnDelete.disabled = false;
+    $btnFicha.disabled = false;
+    let id = e.target.parentElement.dataset.id;
+    cliente = listaClientes.find((c) => c.id.toString() === id);
+    controles = listaControles.filter((control) => {
+      return control.id == cliente.id;
+    });
+    cliente.control = controles;
+    uploadFormCRUD(cliente);
+    uploadFormControl(cliente);
+    swal("Ficha cargada!", `Se cargo a ${cliente.nombre} con exito`, "success");
+  }
+
+  if (e.target.matches("button")) {
+    let id = e.target.dataset.id;
+    let index = listaClientes.findIndex((c) => c.id == id);
+    if (index != -1) {
+      activarDesactivarCliente(id);
+    }
+  }
+});
+
+function activarDesactivarCliente(id) {
+  cliente = listaClientes.find((c) => c.id.toString() === id);
+  let accion = "activar";
+  let mensaje = "activado";
+  if (cliente.estado) {
+    accion = "desactivar";
+    mensaje = "desactivado";
+  }
+  swal({
+    title: `¿Desea ${accion} el cliente?`,
+    text: `Una vez ${mensaje} es posible recuperarlo.`,
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
       controles = listaControles.filter((control) => {
         return control.id == cliente.id;
       });
@@ -154,9 +175,12 @@ window.addEventListener("click", (e) => {
         cliente.estado = 1;
       }
       updateCliente(cliente);
+      swal("¡Exito!", `Cliente ${mensaje}`, "success");
+    } else {
+      swal("No se realizó ningún cambio!");
     }
-  }
-});
+  });
+}
 
 $formularioCRUD.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -222,20 +246,48 @@ $formularioCRUD.addEventListener("submit", (e) => {
 
   if (!lookForClient(listaClientes, numeroCliente.value) && $btnForm.innerHTML === "Guardar") {
     clienteCRUD.estado = 1;
+    listaControles.push(control);
     createCliente(clienteCRUD);
+    swal("¡Exito!", `Cliente Agregado`, "info");
   } else if ($btnForm.innerHTML === "Modificar") {
-    if (!flagDesactivar) {
-      clienteCRUD.estado = 1;
-    }
-    let index = listaClientes.findIndex((c) => c.id == clienteCRUD.id);
-    let indexControl = listaControles.findIndex(
-      (c) => c.id == clienteCRUD.id && c.fecha == clienteCRUD.control[0].fecha
-    );
-    listaControles[indexControl] = clienteCRUD.control[0];
-    listaClientes[index] = clienteCRUD;
-    updateCliente(clienteCRUD);
+    swal({
+      title: `¿Desea modificar a ${clienteCRUD.nombre}?`,
+      text: `Una vez modificado NO es posible recuperar la información.`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        if (!flagDesactivar) {
+          clienteCRUD.estado = 1;
+        }
+        let index = listaClientes.findIndex((c) => c.id == clienteCRUD.id);
+        let indexControl = listaControles.findIndex(
+          (c) => c.id == clienteCRUD.id && c.fecha == clienteCRUD.control[0].fecha
+        );
+        listaControles[indexControl] = clienteCRUD.control[0];
+        listaClientes[index] = clienteCRUD;
+        updateCliente(clienteCRUD);    
+        swal("¡Exito!", `Cliente Modificado`, "success");
+      } else {
+        swal("No se realizó ninguna modificación!");
+      }
+    });
   } else {
-    deleteCliente(parseInt($formularioCRUD.numeroCliente.value));
+    swal({
+      title: `¿Desea eliminar a ${clienteCRUD.nombre}?`,
+      text: `Una vez eliminado NO es posible recuperar la información.`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        deleteCliente(parseInt($formularioCRUD.numeroCliente.value));
+        swal("¡Exito!", `Cliente Eliminado`, "success");
+      } else {
+        swal("No se eliminó ningún cliente!");
+      }
+    });
   }
   $("#miModal").modal("hide");
   controles = [];
@@ -262,26 +314,63 @@ $formularioControl.addEventListener("submit", (e) => {
   let index = cliente.control.findIndex((c) => c.fecha === fecha.value);
 
   if (idSubmitter === "btn-controles-agregar") {
-    cliente.control.push(control);
-    listaControles.push(control);
-    createControl(control);
-    resetFormControls();
+    let controlExist = listaControles.findIndex((c) => c.id == cliente.id && c.fecha == control.fecha);
+    console.log(controlExist);
+    if (controlExist !== -1) {
+      swal(
+        "¡Ya existe el control!",
+        "Verifica que la fecha sea distinta a un control ya existente.",
+        "error"
+      );
+    } else {
+      cliente.control.push(control);
+      listaControles.push(control);
+      createControl(control);
+      resetFormControls();
+      swal("¡Exito!", "Control Agregado", "info");
+    }
   } else if (idSubmitter === "btn-controles-modificar") {
     if (index !== -1) {
-      let indexControl = listaControles.findIndex((c) => c.id == control.id && c.fecha == control.fecha);
-      listaControles[indexControl] = control;
-      cliente.control[index] = control;
-      updateCliente(cliente);
-      resetFormControls();
+      swal({
+        title: `¿Seguro que quiere modificar el control del ${cliente.control[index].fecha}?`,
+        text: "Una vez modificado no es posible recuperar la información.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          let indexControl = listaControles.findIndex((c) => c.id == control.id && c.fecha == control.fecha);
+          listaControles[indexControl] = control;
+          cliente.control[index] = control;
+          updateCliente(cliente);
+          resetFormControls();
+          swal("¡Exito!", "Control Modificado", "success");
+        } else {
+          swal("El control NO fue modificado!");
+        }
+      });
     }
   } else if (idSubmitter === "btn-controles-eliminar") {
     if (index !== -1) {
-      let controlToDelete = cliente.control[index];
-      let indexControl = listaControles.findIndex((c) => c.id == control.id && c.fecha == control.fecha);
-      cliente.control.splice(index, 1);
-      listaControles.splice(indexControl, 1);
-      deleteControl(controlToDelete);
-      resetFormControls();
+      swal({
+        title: `¿Seguro que quiere borrar el control del ${cliente.control[index].fecha}?`,
+        text: "Una vez eliminado no es posible recuperarlo.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          let controlToDelete = cliente.control[index];
+          let indexControl = listaControles.findIndex((c) => c.id == control.id && c.fecha == control.fecha);
+          cliente.control.splice(index, 1);
+          listaControles.splice(indexControl, 1);
+          deleteControl(controlToDelete);
+          resetFormControls();
+          swal("¡Exito!", "Control Eliminado", "success");
+        } else {
+          swal("El control NO fue eliminado!");
+        }
+      });
     }
   }
 });
