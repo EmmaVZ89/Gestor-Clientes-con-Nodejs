@@ -1,14 +1,14 @@
-"use strict";
-
 const express = require("express");
 
 const app = express();
 
+const path = require('path');
+
 app.set("puerto", 2022);
 
-// app.get('/', (request:any, response:any)=>{
-//     response.send('GET - servidor NodeJS');
-// });
+app.get('/', function (request, response) {
+  response.sendFile(path.resolve(__dirname, 'principal.html'));
+});
 
 //AGREGO FILE SYSTEM
 const fs = require("fs");
