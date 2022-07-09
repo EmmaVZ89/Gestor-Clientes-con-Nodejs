@@ -34,6 +34,7 @@ table tr:hover {
 
 .table {
   box-shadow: 10px 10px 10px black;
+  table-layout: fixed;
 }
 
 #contenedor-modal {
@@ -103,13 +104,13 @@ h5 {
   background-position: center;
 }
 
-tr:nth-child(odd){
+tr:nth-child(odd) {
   background: rgba(0, 0, 0, 0.9);
   text-shadow: 0.5px 0.5px black;
   color: white;
 }
 
-tr:nth-child(even){
+tr:nth-child(even) {
   background: rgba(95, 94, 94, 0.9);
   text-shadow: 0.5px 0.5px black;
   color: white;
@@ -123,32 +124,20 @@ tr:nth-child(even){
 #th-table {
   color: greenyellow;
   text-shadow: 1px 1px rgb(66, 65, 65);
+  font-size: 0.8rem;
+  text-align: center;
 }
 
-/* mensajes de confirmacion */
-.alert-mensaje {
-  position: absolute;
-  z-index: 2000;
-  left: 35%;
-  bottom: 10%;
-  animation-name: mensaje;
-  animation-duration: 5s;
-  animation-delay: 0;
-  animation-timing-function: linear;
-  animation-iteration-count: 1;
-  box-shadow: 4px 4px 8px black;
+.tr-table {
+  font-size: 0.8rem;
 }
 
-@keyframes mensaje {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0;
-  }
+.tr-table > td {
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+
 }
 
 #btnActivarDesactivar {
@@ -160,11 +149,29 @@ tr:nth-child(even){
   padding: 5px;
   border-radius: 15px;
   box-shadow: 2px 2px 4px white;
+  font-size: 1rem;
 }
 
 #btnActivarDesactivar:hover {
   background-color: red;
   color: white;
   text-shadow: 1px 1px 1px black;
-  transition: background-color 0.5s, color 0.5s,text-shadow 0.5s;
+  transition: background-color 0.5s, color 0.5s, text-shadow 0.5s;
+}
+
+@media screen and (max-width: 420px) {
+  .btn-crud-contenedor {
+    width: 100%;
+    justify-content: space-between;
+  }
+  #btn-ficha,
+  #btn-crear,
+  #btn-modificar,
+  #btn-eliminar {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+  #btnActivarDesactivar {
+    font-size: 0.4rem;
+  }
 }

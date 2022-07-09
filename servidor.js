@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 
 app.set("puerto", 2022);
-
+ 
 app.get('/', function (request, response) {
   response.sendFile(path.resolve(__dirname, 'principal.html'));
 });
