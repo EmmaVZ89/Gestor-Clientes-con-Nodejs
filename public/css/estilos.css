@@ -136,8 +136,7 @@ tr:nth-child(even) {
   word-wrap: break-word;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow:ellipsis;
-
+  text-overflow: ellipsis;
 }
 
 #btnActivarDesactivar {
@@ -160,6 +159,9 @@ tr:nth-child(even) {
 }
 
 @media screen and (max-width: 420px) {
+  .input-form {
+    width: 95%;
+  }
   .btn-crud-contenedor {
     width: 100%;
     justify-content: space-between;
@@ -173,5 +175,12 @@ tr:nth-child(even) {
   }
   #btnActivarDesactivar {
     font-size: 0.4rem;
+  }
+  .dropControl {
+    text-align: left;
+    margin-left: 1rem;
+  }
+  .modal-footer {
+    margin-left: 1rem;
   }
 }
