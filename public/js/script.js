@@ -27,6 +27,7 @@ const $btnControlCancel = document.querySelector("#btn-controles-cancel");
 const $btnControlProgreso = document.querySelector("#btn-controles-progreso");
 
 let cliente;
+const $tituloCrud = document.querySelector("#modalTitle");
 const $btnForm = document.querySelector("#btn-form");
 const $btnFormCancel = document.querySelector("#btn-form-cancel");
 const $btnCrear = document.querySelector("#btn-crear");
@@ -48,6 +49,7 @@ $btnCrear.addEventListener("click", () => {
   if (!$btnForm.classList.contains("btn-primary")) {
     $btnForm.classList.add("btn-primary");
   }
+  $tituloCrud.innerText = "Alta de Cliente";
   $("#miModal").modal("show");
 });
 
@@ -55,6 +57,7 @@ $btnModificar.addEventListener("click", () => {
   $btnForm.innerText = "Modificar";
   $btnForm.classList.remove("btn-primary");
   $btnForm.classList.add("btn-success");
+  $tituloCrud.innerText = "Modificación de Cliente";
   $("#miModal").modal("show");
 });
 
@@ -62,6 +65,7 @@ $btnDelete.addEventListener("click", () => {
   $btnForm.innerText = "Eliminar";
   $btnForm.classList.remove("btn-primary");
   $btnForm.classList.add("btn-danger");
+  $tituloCrud.innerText = "Baja de Cliente";
   $("#miModal").modal("show");
 });
 

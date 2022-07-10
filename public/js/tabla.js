@@ -75,7 +75,11 @@ function createTbody(array) {
       }
     }
     let $td = document.createElement("td");
-    $td.innerHTML = `<button data-id="${element.id}" id='btnActivarDesactivar'> Activar / Desactivar </button>`;
+    let textoBoton = "Activar";
+    if(element.estado){
+      textoBoton = "Desactivar"
+    }
+    $td.innerHTML = `<button data-id="${element.id}" id='btnActivarDesactivar'>${textoBoton}</button>`;
     $tr.appendChild($td);
     $tbody.appendChild($tr);
   });
