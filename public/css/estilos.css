@@ -139,6 +139,14 @@ tr:nth-child(even) {
   text-overflow: ellipsis;
 }
 
+#btn-ficha,
+#btn-crear,
+#btn-modificar,
+#btn-eliminar {
+  border: 1px solid gray;
+  box-shadow: 2px 2px 4px black;
+}
+
 #btnActivarDesactivar {
   width: 100%;
   background-color: greenyellow;
@@ -170,8 +178,8 @@ tr:nth-child(even) {
   #btn-crear,
   #btn-modificar,
   #btn-eliminar {
-    margin-right: 0px !important;
-    margin-left: 0px !important;
+    margin-right: 2px !important;
+    margin-left: 2px !important;
   }
   #btnActivarDesactivar {
     font-size: 0.4rem;

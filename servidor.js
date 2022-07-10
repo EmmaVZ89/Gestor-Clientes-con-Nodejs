@@ -2,12 +2,17 @@ const express = require("express");
 
 const app = express();
 
-const path = require('path');
+const path = require("path");
 
 app.set("puerto", 2022);
- 
-app.get('/', function (request, response) {
-  response.sendFile(path.resolve(__dirname, 'principal.html'));
+
+// VISTAS
+app.get("/inicio", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "login.html"));
+});
+
+app.get("/", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "principal.html"));
 });
 
 //AGREGO FILE SYSTEM
@@ -65,12 +70,14 @@ const verificar_usuario = express.Router();
 const verificar_jwt = express.Router();
 
 verificar_usuario.use((request, response, next) => {
-  let obj = request.body;
+  let usuario = {};
+  usuario.nombre = request.body.nombreUsuario;
+  usuario.clave = request.body.clave; 
   request.getConnection((err, conn) => {
     if (err) throw "Error al conectarse a la base de datos.";
     conn.query(
-      "SELECT * FROM usuarios WHERE correo = ? and clave = ? ",
-      [obj.correo, obj.clave],
+      "SELECT * FROM usuarios WHERE nombre = ? and clave = ? ",
+      [usuario.nombre, usuario.clave],
       (err, rows) => {
         if (err) throw "Error en consulta de base de datos.";
         if (rows.length == 1) {
@@ -80,7 +87,7 @@ verificar_usuario.use((request, response, next) => {
         } else {
           response.status(401).json({
             exito: false,
-            mensaje: "Correo y/o Clave incorrectos.",
+            mensaje: "Usuario y/o Contraseña incorrectos",
             jwt: null,
           });
         }
@@ -96,21 +103,19 @@ app.post("/login", verificar_usuario, (request, response, obj) => {
   const payload = {
     usuario: {
       id: user.id,
-      correo: user.correo,
       nombre: user.nombre,
       apellido: user.apellido,
-      foto: user.foto,
       perfil: user.perfil,
     },
     administrador: {
       nombre: "Soledad",
       apellido: "Quiroz",
     },
-    parcial: "Gestor de Clientes",
+    app: "Gestor de Clientes",
   };
   //SE FIRMA EL TOKEN CON EL PAYLOAD Y LA CLAVE SECRETA
   const token = jwt.sign(payload, app.get("key"), {
-    expiresIn: "4m",
+    expiresIn: "520000m",
   });
   response.json({
     exito: true,
@@ -121,6 +126,7 @@ app.post("/login", verificar_usuario, (request, response, obj) => {
 
 verificar_jwt.use((request, response, next) => {
   //SE RECUPERA EL TOKEN DEL ENCABEZADO DE LA PETICIÓN
+  console.log(request.body.headers["authorization"]);
   let token = request.headers["x-access-token"] || request.headers["authorization"];
   if (!token) {
     response.status(401).send({
@@ -140,7 +146,6 @@ verificar_jwt.use((request, response, next) => {
           mensaje: "El JWT NO es válido!!!",
         });
       } else {
-        console.log("middleware verificar_jwt");
         //SE AGREGA EL TOKEN AL OBJETO DE LA RESPUESTA
         response.jwt = decoded;
         //SE INVOCA AL PRÓXIMO CALLEABLE
@@ -151,7 +156,6 @@ verificar_jwt.use((request, response, next) => {
 });
 
 app.get("/login", (request, response) => {
-  // response.json({exito:true, payload: response.jwt});
   let obj_respuesta = {
     exito: false,
     mensaje: "El JWT es requerido!!!",
@@ -183,32 +187,6 @@ app.get("/login", (request, response) => {
       }
     });
   }
-});
-
-// CRUD USUARIOS **************************************************************************************
-// Listar usuarios OK
-app.get("/listarUsuariosBD", verificar_jwt, (request, response) => {
-  let obj_respuesta = {
-    exito: false,
-    mensaje: "No se encontraron usuarios",
-    dato: {},
-    status: 424,
-  };
-  request.getConnection((err, conn) => {
-    if (err) throw "Error al conectarse a la base de datos.";
-    conn.query("SELECT * FROM usuarios", (err, rows) => {
-      if (err) throw "Error en consulta de base de datos.";
-      if (rows.length == 0) {
-        response.status(obj_respuesta.status).json(obj_respuesta);
-      } else {
-        obj_respuesta.exito = true;
-        obj_respuesta.mensaje = "Usuarios encontrados!";
-        obj_respuesta.dato = rows;
-        obj_respuesta.status = 200;
-        response.status(obj_respuesta.status).json(obj_respuesta);
-      }
-    });
-  });
 });
 
 // CRUD CLIENTES **************************************************************************************
@@ -262,13 +240,16 @@ app.post("/agregarCliente", (request, response) => {
 });
 
 // Listar clientes
-app.get("/listarClientes", (request, response) => {
+app.get("/listarClientes",(request, response) => {
   let obj_respuesta = {
     exito: false,
     mensaje: "No se encontraron clientes",
     dato: {},
+    payload: null,
     status: 424,
   };
+
+  let jwt = response.jwt;
 
   request.getConnection((err, conn) => {
     if (err) throw "Error al conectarse a la base de datos.";
@@ -280,8 +261,9 @@ app.get("/listarClientes", (request, response) => {
         obj_respuesta.exito = true;
         obj_respuesta.mensaje = "Clientes encontrados!";
         obj_respuesta.dato = rows;
+        obj_respuesta.payload = jwt;
         obj_respuesta.status = 200;
-        response.status(obj_respuesta.status).json(rows);
+        response.status(obj_respuesta.status).json(obj_respuesta);
       }
     });
   });
@@ -457,16 +439,20 @@ app.post("/modificarControl", (request, response) => {
 
   request.getConnection((err, conn) => {
     if (err) throw "Error al conectarse a la base de datos.";
-    conn.query("UPDATE controles SET ? WHERE id = ? AND fecha = ?", [control_json.id, control_json.fecha], (err, rows) => {
-      if (err) {
-        console.log(err);
-        throw "Error en consulta de base de datos.";
+    conn.query(
+      "UPDATE controles SET ? WHERE id = ? AND fecha = ?",
+      [control_json.id, control_json.fecha],
+      (err, rows) => {
+        if (err) {
+          console.log(err);
+          throw "Error en consulta de base de datos.";
+        }
+        obj_respuesta.exito = true;
+        obj_respuesta.mensaje = "Control modificado!";
+        obj_respuesta.status = 200;
+        response.status(obj_respuesta.status).json(obj_respuesta);
       }
-      obj_respuesta.exito = true;
-      obj_respuesta.mensaje = "Control modificado!";
-      obj_respuesta.status = 200;
-      response.status(obj_respuesta.status).json(obj_respuesta);
-    });
+    );
   });
 });
 
@@ -492,16 +478,20 @@ app.post("/eliminarControl", (request, response) => {
 
   request.getConnection((err, conn) => {
     if (err) throw "Error al conectarse a la base de datos.";
-    conn.query("DELETE FROM controles WHERE id = ? AND fecha = ?", [control_json.id, control_json.fecha], (err, rows) => {
-      if (err) {
-        console.log(err);
-        throw "Error en consulta de base de datos.";
+    conn.query(
+      "DELETE FROM controles WHERE id = ? AND fecha = ?",
+      [control_json.id, control_json.fecha],
+      (err, rows) => {
+        if (err) {
+          console.log(err);
+          throw "Error en consulta de base de datos.";
+        }
+        obj_respuesta.exito = true;
+        obj_respuesta.mensaje = "Control eliminado!";
+        obj_respuesta.status = 200;
+        response.status(obj_respuesta.status).json(obj_respuesta);
       }
-      obj_respuesta.exito = true;
-      obj_respuesta.mensaje = "Control eliminado!";
-      obj_respuesta.status = 200;
-      response.status(obj_respuesta.status).json(obj_respuesta);
-    });
+    );
   });
 });
 
