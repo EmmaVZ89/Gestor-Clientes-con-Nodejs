@@ -37,6 +37,11 @@ $btnModificar.disabled = true;
 $btnDelete.disabled = true;
 $btnFicha.disabled = true;
 
+// Logout
+const $btnLogOut = document.querySelector("#btn-logout");
+$btnLogOut.addEventListener("click", () => {
+  logOut();
+});
 // EVENTOS BOTONES -----------------------------------------------------------------------------------
 $btnCrear.addEventListener("click", () => {
   resetForm();
@@ -643,11 +648,10 @@ function VerificarJWT() {
 
 function logOut() {
   localStorage.removeItem("jwt");
-  swal("!Sesión Terminada!", "Debe iniciar sesión nuevamente", "error");
+  swal("!Sesión cerrada!", "Redirigiendo...", "success");
   setTimeout(() => {
     $(location).attr("href", URL + "inicio");
-  }, 1000);
+  }, 2000);
 }
-
 
 export { updateTable, resetForm };

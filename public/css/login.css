@@ -51,6 +51,6 @@ body {
 @media screen and (max-width: 420px) {
     #form-container {
         width: 95%;
-        margin-top: 50%;
+        margin-top: 25%;
     }
 }

@@ -16,6 +16,11 @@ body {
   display: none;
 }
 
+#btn-logout:hover {
+  background-color: rgb(201, 28, 28);
+  transition: background-color 0.5s;
+}
+
 table tr:hover {
   cursor: pointer;
 }
