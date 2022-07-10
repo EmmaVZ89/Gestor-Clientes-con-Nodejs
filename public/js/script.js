@@ -1,6 +1,6 @@
 import { Cliente, Control } from "./cliente.js";
 import createTable from "./tabla.js";
-import { updateControlList, activateControlFields, desactivateControlFields } from "./listaControles.js";
+import { updateControlList, activateControlFields, desactivateControlFields, dateFormat } from "./listaControles.js";
 
 const URL = "http://localhost:2022/";
 
@@ -182,7 +182,7 @@ function activarDesactivarCliente(id) {
         cliente.estado = 1;
       }
       updateCliente(cliente);
-      swal("¡Exito!", `Cliente ${mensaje}`, "success");
+      swal(`!OK!`, `El cliente fue ${mensaje}`, "success");
     } else {
       swal("No se realizó ningún cambio!");
     }
@@ -255,7 +255,7 @@ $formularioCRUD.addEventListener("submit", (e) => {
     clienteCRUD.estado = 1;
     listaControles.push(control);
     createCliente(clienteCRUD);
-    swal("¡Exito!", `Cliente Agregado`, "info");
+    swal("Agregado!", `El cliente fue agregado`, "success");
   } else if ($btnForm.innerHTML === "Modificar") {
     swal({
       title: `¿Desea modificar a ${clienteCRUD.nombre}?`,
@@ -275,7 +275,7 @@ $formularioCRUD.addEventListener("submit", (e) => {
         listaControles[indexControl] = clienteCRUD.control[0];
         listaClientes[index] = clienteCRUD;
         updateCliente(clienteCRUD);
-        swal("¡Exito!", `Cliente Modificado`, "success");
+        swal("Modificado!", `El cliente fue modificado`, "success");
       } else {
         swal("No se realizó ninguna modificación!");
       }
@@ -290,7 +290,7 @@ $formularioCRUD.addEventListener("submit", (e) => {
     }).then((willDelete) => {
       if (willDelete) {
         deleteCliente(parseInt($formularioCRUD.numeroCliente.value));
-        swal("¡Exito!", `Cliente Eliminado`, "success");
+        swal("Eliminado!", `El cliente fue eliminado`, "success");
       } else {
         swal("No se eliminó ningún cliente!");
       }
@@ -334,12 +334,12 @@ $formularioControl.addEventListener("submit", (e) => {
       listaControles.push(control);
       createControl(control);
       resetFormControls();
-      swal("¡Exito!", "Control Agregado", "info");
+      swal("Agregado!", "El control fue agregado", "success");
     }
   } else if (idSubmitter === "btn-controles-modificar") {
     if (index !== -1) {
       swal({
-        title: `¿Seguro que quiere modificar el control del ${cliente.control[index].fecha}?`,
+        title: `¿Seguro que quiere modificar el control del ${dateFormat(new Date(cliente.control[index].fecha + "T00:00:00"))}?`,
         text: "Una vez modificado no es posible recuperar la información.",
         icon: "warning",
         buttons: true,
@@ -351,7 +351,7 @@ $formularioControl.addEventListener("submit", (e) => {
           cliente.control[index] = control;
           updateCliente(cliente);
           resetFormControls();
-          swal("¡Exito!", "Control Modificado", "success");
+          swal("Modificado!", "El control fue modificado", "success");
         } else {
           swal("El control NO fue modificado!");
         }
@@ -360,7 +360,7 @@ $formularioControl.addEventListener("submit", (e) => {
   } else if (idSubmitter === "btn-controles-eliminar") {
     if (index !== -1) {
       swal({
-        title: `¿Seguro que quiere borrar el control del ${cliente.control[index].fecha}?`,
+        title: `¿Seguro que quiere eliminar el control del ${dateFormat(new Date(cliente.control[index].fecha + "T00:00:00"))}?`,
         text: "Una vez eliminado no es posible recuperarlo.",
         icon: "warning",
         buttons: true,
@@ -373,7 +373,7 @@ $formularioControl.addEventListener("submit", (e) => {
           listaControles.splice(indexControl, 1);
           deleteControl(controlToDelete);
           resetFormControls();
-          swal("¡Exito!", "Control Eliminado", "success");
+          swal("!Eliminado!", "El control fue eliminado", "success");
         } else {
           swal("El control NO fue eliminado!");
         }
@@ -411,7 +411,6 @@ async function createCliente(nuevoCliente) {
     const { data } = await axios.post(URL + "agregarCliente", nuevoCliente);
     updateTable(listaClientes);
     resetForm();
-    // console.log("CREATE: ", data);
   } catch (error) {
     console.error(error);
   }
@@ -627,20 +626,20 @@ function VerificarJWT() {
   })
     .done(function (obj_rta) {
       if (obj_rta.exito) {
-        console.log("Usuario logueado!");
+        console.log("Sesión Iniciada!");
       } else {
-        swal("!Inicia sesión!", "Debes iniciar sesión para continuar", "error");
+        swal("!Inicio Fallido!", "Debes iniciar sesión para continuar", "error");
         setTimeout(() => {
-          $(location).attr("href", URL + "inicio");
+          $(location).attr("href", URL);
         }, 1000);
       }
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
       var retorno = JSON.parse(jqXHR.responseText);
       if (retorno.exito == false) {
-        swal("!Inicia sesión!", "Debes iniciar sesión para continuar", "error");
+        swal("!Inicio Fallido!", "Debes iniciar sesión para continuar", "error");
         setTimeout(() => {
-          $(location).attr("href", URL + "inicio");
+          $(location).attr("href", URL);
         }, 1000);
       }
     });
@@ -650,7 +649,7 @@ function logOut() {
   localStorage.removeItem("jwt");
   swal("!Sesión cerrada!", "Redirigiendo...", "success");
   setTimeout(() => {
-    $(location).attr("href", URL + "inicio");
+    $(location).attr("href", URL);
   }, 2000);
 }
 

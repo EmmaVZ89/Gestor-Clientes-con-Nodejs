@@ -26,7 +26,15 @@ body {
   border-radius: 10px;
   padding: 4rem 0;
   box-shadow: 4px 4px 6px black;
-  margin-top: 5%;
+  margin-top: 4%;
+}
+
+.gestor-titulo {
+  font-family: "Anton", sans-serif;
+  color: greenyellow;
+  text-align: center;
+  margin-top: 2rem;
+  text-shadow: 0 0 16px black;
 }
 
 .inicio-sesion-titulo {
@@ -51,6 +59,6 @@ body {
 @media screen and (max-width: 420px) {
     #form-container {
         width: 95%;
-        margin-top: 25%;
+        margin-top: 20%;
     }
 }

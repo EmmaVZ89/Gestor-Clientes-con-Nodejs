@@ -45,4 +45,4 @@ function dateFormat(date) {
   return `${day}-${month}-${year}`;
 }
 
-export { updateControlList, activateControlFields, desactivateControlFields };
+export { updateControlList, activateControlFields, desactivateControlFields, dateFormat };

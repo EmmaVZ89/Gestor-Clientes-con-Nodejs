@@ -1,5 +1,7 @@
 const URL = "http://localhost:2022/";
 
+VerificarSesionIniciada();
+
 $("#btn-iniciar").on("click", (e) => {
   e.preventDefault();
   let nombreUsuario = $("#nombreUsuario").val();
@@ -18,16 +20,39 @@ $("#btn-iniciar").on("click", (e) => {
       if (obj_ret.exito) {
         //GUARDO EN EL LOCALSTORAGE
         localStorage.setItem("jwt", obj_ret.jwt);
-        swal("!Usuario Valido!", "Redirigiendo...", "success");
+        swal("!Sesión Iniciada!", "Redirigiendo...", "success");
         setTimeout(() => {
-          $(location).attr("href", URL);
+          $(location).attr("href", URL + "inicio");
         }, 2000);
       } else {
-        swal("!Usuario Inválido!", obj_ret.mensaje, "error");
+        swal("!Inicio Fallido!", obj_ret.mensaje, "error");
       }
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
       let respuesta = JSON.parse(jqXHR.responseText);
-      swal("!Usuario Inválido!", respuesta.mensaje, "error");
+      swal("!Inicio Fallido!", respuesta.mensaje, "error");
     });
 });
+
+function VerificarSesionIniciada() {
+  var jwt = localStorage.getItem("jwt");
+  $.ajax({
+    type: "GET",
+    url: URL + "login",
+    dataType: "json",
+    data: {},
+    headers: { Authorization: "Bearer " + jwt },
+    async: true,
+  })
+    .done(function (obj_rta) {
+      if (obj_rta.exito) {
+        swal("!Sesión Iniciada!", "Redirigiendo...", "success");
+        setTimeout(() => {
+          $(location).attr("href", URL + "inicio");
+        }, 1000);
+      }
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      var retorno = JSON.parse(jqXHR.responseText);
+    });
+}

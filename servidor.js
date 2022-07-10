@@ -8,11 +8,11 @@ app.set("puerto", 2022);
 
 // VISTAS
 app.get("/inicio", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "login.html"));
+  response.sendFile(path.resolve(__dirname, "principal.html"));
 });
 
 app.get("/", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "principal.html"));
+  response.sendFile(path.resolve(__dirname, "login.html"));
 });
 
 //AGREGO FILE SYSTEM
