@@ -23,6 +23,7 @@ function updateControlList(cliente) {
 function activateControlFields() {
   const inputs = document.querySelectorAll("#form-controls input");
   inputs.forEach((input) => {
+    // if (input.name !== "numeroCliente" && input.name !== "nombre" && input.name !== "objetivo") {
     if (input.name !== "numeroCliente" && input.name !== "nombre") {
       input.disabled = false;
     }

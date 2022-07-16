@@ -16,6 +16,20 @@ body {
   display: none;
 }
 
+#foto-usuario {
+  width: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid gray;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+#nombre-usuario {
+  color: white;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
 #btn-logout:hover {
   background-color: rgb(201, 28, 28);
   transition: background-color 0.5s;
@@ -39,7 +53,15 @@ table tr:hover {
 
 .table {
   box-shadow: 10px 10px 10px black;
-  table-layout: fixed;
+  table-layout: fixed; 
+}
+
+#tablaClientes_length > label,
+#tablaClientes_filter > label,
+#tablaClientes_info {
+  font-weight: bold;
+  text-shadow: 0 0 6px rgb(0, 0, 0);
+  color: white;
 }
 
 #contenedor-modal {
@@ -78,6 +100,7 @@ h5 {
   display: flex;
   width: fit-content;
   justify-content: center;
+  margin-top: 1rem;
   margin-bottom: 3rem;
   padding-bottom: 3rem;
   border-radius: 1rem;
@@ -186,6 +209,9 @@ tr:nth-child(even) {
     margin-right: 2px !important;
     margin-left: 2px !important;
   }
+  #th-activarDesactivar {
+    font-size: 0.5rem;
+  }  
   #btnActivarDesactivar {
     font-size: 0.4rem;
   }
