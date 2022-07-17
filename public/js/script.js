@@ -92,6 +92,8 @@ $btnCrear.addEventListener("click", () => {
 
 $btnModificar.addEventListener("click", () => {
   enableInputs();
+  const { numeroCliente } = $formularioCRUD;
+  numeroCliente.disabled = true;
   $btnForm.innerText = "Modificar";
   $btnForm.classList.remove("btn-primary");
   $btnForm.classList.add("btn-success");
