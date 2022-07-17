@@ -54,6 +54,16 @@ const $linkClientesActivos = document.querySelector("#clientes-activos");
 const $linkClientesInactivos = document.querySelector("#clientes-inactivos");
 const $linkClientesTodos = document.querySelector("#clientes-todos");
 
+// Btn mensaje
+const $btnCopiarMensaje = document.querySelector("#btn-copiar-progreso");
+const $contenedorMensaje = document.querySelector("#txtMensaje");
+$btnCopiarMensaje.addEventListener("click", () => {
+  let content = document.getElementById("txtMensaje");
+  content.select();
+  document.execCommand("copy");
+  swal("¡ Copiado !", `El mensaje fue copiado.`, "success");
+});
+
 // EVENTOS LINKS -----------------------------------------------------------------------------------
 $linkClientesActivos.addEventListener("click", () => {
   let listaActivos = listaClientes.filter((c) => c.estado === 1);
@@ -119,29 +129,63 @@ $btnFicha.addEventListener("click", () => {
 $btnControlProgreso.addEventListener("click", () => {
   resetFormControls();
   if (document.querySelector("#dropdownMenuButton1").disabled === false) {
-    const { fecha, peso, pecho, cintura, ombligo, cadera, biceps, muslo, objetivo } = $formularioControl;
+    const { fecha, peso, pecho, cintura, ombligo, cadera, biceps, muslo, objetivo, nombre } =
+      $formularioControl;
     document.querySelector("#dropdownMenuButton1").disabled = true;
     document.querySelector("#btn-controles-agregar").disabled = true;
 
-    fecha.value = actualDate.toJSON().slice(0, 10);
-    peso.value = (cliente.control[cliente.control.length - 1].peso - cliente.control[0].peso).toFixed(3);
-    pecho.value = (cliente.control[cliente.control.length - 1].pecho - cliente.control[0].pecho).toFixed(2);
-    cintura.value = (
+    let diferenciaPeso = (cliente.control[cliente.control.length - 1].peso - cliente.control[0].peso).toFixed(
+      3
+    );
+    let diferenciaPecho = (
+      cliente.control[cliente.control.length - 1].pecho - cliente.control[0].pecho
+    ).toFixed(2);
+    let diferenciaCintura = (
       cliente.control[cliente.control.length - 1].cintura - cliente.control[0].cintura
     ).toFixed(2);
-    ombligo.value = (
+    let diferenciaOmbligo = (
       cliente.control[cliente.control.length - 1].ombligo - cliente.control[0].ombligo
     ).toFixed(2);
-    cadera.value = (cliente.control[cliente.control.length - 1].cadera - cliente.control[0].cadera).toFixed(
-      2
-    );
-    biceps.value = (cliente.control[cliente.control.length - 1].biceps - cliente.control[0].biceps).toFixed(
-      2
-    );
-    muslo.value = (cliente.control[cliente.control.length - 1].muslos - cliente.control[0].muslos).toFixed(2);
+    let diferenciaCadera = (
+      cliente.control[cliente.control.length - 1].cadera - cliente.control[0].cadera
+    ).toFixed(2);
+    let diferenciaBiceps = (
+      cliente.control[cliente.control.length - 1].biceps - cliente.control[0].biceps
+    ).toFixed(2);
+    let diferenciaMuslo = (
+      cliente.control[cliente.control.length - 1].muslos - cliente.control[0].muslos
+    ).toFixed(2);
+    fecha.value = actualDate.toJSON().slice(0, 10);
+    peso.value = diferenciaPeso;
+    pecho.value = diferenciaPecho;
+    cintura.value = diferenciaCintura;
+    ombligo.value = diferenciaOmbligo;
+    cadera.value = diferenciaCadera;
+    biceps.value = diferenciaBiceps;
+    muslo.value = diferenciaMuslo;
     objetivo.value = (
       cliente.control[cliente.control.length - 1].objetivo - cliente.control[0].objetivo
     ).toFixed(2);
+
+    let cont = document.querySelector("#contenedorMensajePersonal");
+    cont.style.opacity = 1;
+    cont.style.display = "flex";
+    cont.classList.add("view-from-right");
+    $contenedorMensaje.value = `⭐ FELICITACIONES TENEMOS MEGA RESULTADO DE ${nombre.value.toUpperCase()} ⭐
+
+    Bajó  ${Math.abs(
+      diferenciaPeso
+    )}  Kg y esta super enfocada en lograr su mejor versión !! Super disciplinada en todo y miren los resultados que está teniendo y felicitémosla !!!!
+    
+    CENTÍMETROS MENOS
+    🔴Pecho:  ${Math.abs(diferenciaPecho)} cm
+    🔴Cintura:  ${Math.abs(diferenciaCintura)} cm
+    🔴Ombligo:  ${Math.abs(diferenciaOmbligo)} cm
+    🔴Cadera:  ${Math.abs(diferenciaCadera)} cm
+    🔴Bíceps:  ${Math.abs(diferenciaBiceps)} cm
+    🔴Muslo:  ${Math.abs(diferenciaMuslo)} cm
+    La disciplina es el puente entre las metas y los logros.
+    😃💪🏻👏🏻😱🍾🎊🎉🎈🎁`;
 
     $btnControlProgreso.textContent = "Dejar de ver";
     $btnControlProgreso.classList.toggle("btn-info");
@@ -149,6 +193,10 @@ $btnControlProgreso.addEventListener("click", () => {
     changeColors();
     desactivateControlFields();
   } else {
+    let cont = document.querySelector("#contenedorMensajePersonal");
+    cont.style.opacity = 0;
+    cont.style.display = "none";
+    cont.classList.remove("view-from-right");
     document.querySelector("#dropdownMenuButton1").disabled = false;
     $btnControlProgreso.textContent = "Ver Progreso";
     $btnControlProgreso.classList.toggle("btn-info");
@@ -585,6 +633,10 @@ function resetFormControls() {
   document.querySelector("#btn-controles-modificar").disabled = true;
   document.querySelector("#btn-controles-eliminar").disabled = true;
   $btnControlProgreso.textContent = "Ver Progreso";
+  let cont = document.querySelector("#contenedorMensajePersonal");
+  cont.style.opacity = 0;
+  cont.style.display = "none";
+  cont.classList.remove("view-from-right");
   activateControlFields();
   resetColors();
 }

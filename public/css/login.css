@@ -56,6 +56,25 @@ body {
   width: 20rem;
 }
 
+/* Animated Scroll right */
+.animated-scroll-right {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.view-from-right {
+  animation: viewFromRight 0.5s;
+}
+
+@keyframes viewFromRight {
+  0% {
+    transform: translateX(-400px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 @media screen and (max-width: 420px) {
     #form-container {
         width: 95%;

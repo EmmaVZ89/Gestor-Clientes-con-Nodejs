@@ -1,5 +1,7 @@
 const express = require("express");
 
+const bcryptjs = require("bcryptjs");
+
 const app = express();
 
 const path = require("path");
@@ -72,15 +74,15 @@ const verificar_jwt = express.Router();
 verificar_usuario.use((request, response, next) => {
   let usuario = {};
   usuario.nombre = request.body.nombreUsuario;
-  usuario.clave = request.body.clave;
+  usuario.clave = request.body.clave; 
+
   request.getConnection((err, conn) => {
     if (err) throw "Error al conectarse a la base de datos.";
-    conn.query(
-      "SELECT * FROM usuarios WHERE nombre = ? and clave = ? ",
-      [usuario.nombre, usuario.clave],
-      (err, rows) => {
-        if (err) throw "Error en consulta de base de datos.";
-        if (rows.length == 1) {
+    conn.query("SELECT * FROM usuarios WHERE nombre = ?", [usuario.nombre], (err, rows) => {
+      if (err) throw "Error en consulta de base de datos.";
+      if (rows.length == 1) {
+        let comparacion = bcryptjs.compareSync(usuario.clave, rows[0].clave);
+        if (comparacion) {
           response.obj_usuario = rows[0];
           //SE INVOCA AL PRÓXIMO CALLEABLE
           next();
@@ -91,8 +93,14 @@ verificar_usuario.use((request, response, next) => {
             jwt: null,
           });
         }
+      } else {
+        response.status(401).json({
+          exito: false,
+          mensaje: "Usuario y/o Contraseña incorrectos",
+          jwt: null,
+        });
       }
-    );
+    });
   });
 });
 
@@ -102,7 +110,6 @@ app.post("/login", verificar_usuario, (request, response, obj) => {
   //SE CREA EL PAYLOAD CON LOS ATRIBUTOS QUE NECESITAMOS
   const payload = {
     usuario: {
-      id: user.id,
       nombre: user.nombre,
       apellido: user.apellido,
       perfil: user.perfil,
@@ -436,6 +443,10 @@ app.get("/listarControles", verificar_jwt, (request, response) => {
     dato: {},
     status: 424,
   };
+
+  // let pass = "pass"
+  // let passHash = await bcryptjs.hash(pass, 8);
+  // console.log(passHash);
 
   let jwt = response.jwt;
 

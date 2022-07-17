@@ -60,7 +60,9 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a id="clientes-activos" class="dropdown-item" href="#activos">Ver Activos</a></li>
-                  <li><a id="clientes-inactivos" class="dropdown-item" href="#inactivos">Ver Inactivos</a></li>
+                  <li>
+                    <a id="clientes-inactivos" class="dropdown-item" href="#inactivos">Ver Inactivos</a>
+                  </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li><a id="clientes-todos" class="dropdown-item" href="#todos">Ver todos</a></li>
                 </ul>
@@ -519,12 +521,20 @@
                     />
                     <label for="txtObjetivoIMC">IMC </label>
                   </div>
-                  <div id="alert-mensaje"></div>
                 </div>
-                <div class="container">
+                <div id="contenedorMensajePersonal" class="container contenedor-mensaje">
                   <button id="btn-copiar-progreso" type="button" class="btn btn-secondary">
                     Copiar Mensaje
                   </button>
+                  <div class="mb-3 area-mensaje">
+                    <textarea
+                      class="form-control"
+                      id="txtMensaje"
+                      name="mensaje"
+                      rows="14"
+                      placeholder="Mensaje"
+                    ></textarea>
+                  </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                   <div>

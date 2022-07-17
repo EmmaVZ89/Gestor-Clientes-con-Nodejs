@@ -2,6 +2,10 @@ const URL = "http://localhost:2022/";
 
 VerificarSesionIniciada();
 
+let animateX = document.querySelectorAll(".animated-scroll-right");
+animateX[0].style.opacity = 1;
+animateX[0].classList.add("view-from-right");
+
 $("#btn-iniciar").on("click", (e) => {
   e.preventDefault();
   let nombreUsuario = $("#nombreUsuario").val().trim().toLowerCase();
