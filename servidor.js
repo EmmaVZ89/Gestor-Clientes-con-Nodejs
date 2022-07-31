@@ -54,15 +54,7 @@ app.use(cors());
 app.use(express.static("public"));
 
 //AGREGO MYSQL y EXPRESS-MYCONNECTION
-const mysql = require("mysql");
-const myconn = require("express-myconnection");
-const db_options = {
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "",
-  database: "clientes_bd",
-};
+const {mysql, myconn, db_options} = require("./db/connect");
 app.use(myconn(mysql, db_options, "single"));
 
 //##############################################################################################//
@@ -194,7 +186,7 @@ app.get("/login", (request, response) => {
     });
   }
 });
-//
+
 // CRUD CLIENTES **************************************************************************************
 // Agregar cliente
 app.post("/agregarCliente", verificar_jwt, (request, response) => {
