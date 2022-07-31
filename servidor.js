@@ -194,7 +194,7 @@ app.get("/login", (request, response) => {
     });
   }
 });
-
+//
 // CRUD CLIENTES **************************************************************************************
 // Agregar cliente
 app.post("/agregarCliente", verificar_jwt, (request, response) => {
