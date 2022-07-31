@@ -1,15 +1,16 @@
+require("dotenv").config();
 const mysql = require("mysql");
 const myconn = require("express-myconnection");
 const db_options = {
-  host: "localhost",
+  host: process.env.HOST,
   port: 3306,
-  user: "root",
-  password: "",
-  database: "clientes_bd",
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 };
 
-module.exports = {
-  mysql,
-  myconn,
-  db_options,
+const connectMySQL = () => {
+  return myconn(mysql, db_options, "single");
 };
+
+module.exports = {connectMySQL};

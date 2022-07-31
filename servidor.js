@@ -6,8 +6,6 @@ const app = express();
 
 const path = require("path");
 
-app.set("puerto", 2022);
-
 // VISTAS
 app.get("/inicio", function (request, response) {
   response.sendFile(path.resolve(__dirname, "principal.html"));
@@ -54,8 +52,8 @@ app.use(cors());
 app.use(express.static("public"));
 
 //AGREGO MYSQL y EXPRESS-MYCONNECTION
-const {mysql, myconn, db_options} = require("./db/connect");
-app.use(myconn(mysql, db_options, "single"));
+const { connectMySQL } = require("./db/connect");
+app.use(connectMySQL());
 
 //##############################################################################################//
 //RUTAS Y MIDDLEWATE PARA EL SERVIDOR DE AUTENTICACIÓN DE USUARIO Y JWT
@@ -66,7 +64,7 @@ const verificar_jwt = express.Router();
 verificar_usuario.use((request, response, next) => {
   let usuario = {};
   usuario.nombre = request.body.nombreUsuario;
-  usuario.clave = request.body.clave; 
+  usuario.clave = request.body.clave;
 
   request.getConnection((err, conn) => {
     if (err) throw "Error al conectarse a la base de datos.";
@@ -559,6 +557,17 @@ app.post("/eliminarControl", verificar_jwt, (request, response) => {
   }
 });
 
-app.listen(app.get("puerto"), () => {
-  console.log("Servidor corriendo sobre puerto:", app.get("puerto"));
-});
+// Server start
+const port = process.env.PORT || 2022;
+const start = async () => {
+  try {
+    //
+    app.listen(port, () => {
+      console.log(`Servidor corriendo sobre puerto: ${port}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();

@@ -13,6 +13,7 @@ $("#btn-iniciar").on("click", (e) => {
   let dato = {};
   dato.nombreUsuario = nombreUsuario;
   dato.clave = clave;
+  
   $.ajax({
     type: "POST",
     url: URL + "login",
@@ -23,6 +24,7 @@ $("#btn-iniciar").on("click", (e) => {
     .done(function (obj_ret) {
       if (obj_ret.exito) {
         //GUARDO EN EL LOCALSTORAGE
+        console.log(obj_ret); 
         localStorage.setItem("jwt", obj_ret.jwt);
         swal("!Sesión Iniciada!", "Redirigiendo...", "success");
         setTimeout(() => {
