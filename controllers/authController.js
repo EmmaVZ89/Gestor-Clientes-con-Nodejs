@@ -48,7 +48,6 @@ const checkLogin = async (req, res) => {
       obj_respuesta.mensaje = "El JWT NO es válido!!!";
       return res.status(obj_respuesta.status).json(obj_respuesta);
     }
-    console.log(isVerifiedToken);
     obj_respuesta.exito = true;
     obj_respuesta.mensaje = "El JWT es valido";
     obj_respuesta.payload = isVerifiedToken;
