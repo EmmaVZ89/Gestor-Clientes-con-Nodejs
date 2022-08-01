@@ -94,7 +94,7 @@ verificar_usuario.use((request, response, next) => {
   });
 });
 
-app.post("/login", verificar_usuario, (request, response, obj) => {
+app.post("/login", verificar_usuario, (request, response) => {
   //SE RECUPERA EL USUARIO DEL OBJETO DE LA RESPUESTA
   const user = response.obj_usuario;
   //SE CREA EL PAYLOAD CON LOS ATRIBUTOS QUE NECESITAMOS
