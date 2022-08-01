@@ -58,68 +58,72 @@ app.use(connectMySQL());
 //##############################################################################################//
 //RUTAS Y MIDDLEWATE PARA EL SERVIDOR DE AUTENTICACIÓN DE USUARIO Y JWT
 //##############################################################################################//
-const verificar_usuario = express.Router();
+const authRouter = require("./routes/authRoutes");
+
+app.use("/login", authRouter);
+
+// const verificar_usuario = express.Router();
 const verificar_jwt = express.Router();
 
-verificar_usuario.use((request, response, next) => {
-  let usuario = {};
-  usuario.nombre = request.body.nombreUsuario;
-  usuario.clave = request.body.clave;
+// verificar_usuario.use((request, response, next) => {
+//   let usuario = {};
+//   usuario.nombre = request.body.nombreUsuario;
+//   usuario.clave = request.body.clave;
 
-  request.getConnection((err, conn) => {
-    if (err) throw "Error al conectarse a la base de datos.";
-    conn.query("SELECT * FROM usuarios WHERE nombre = ?", [usuario.nombre], (err, rows) => {
-      if (err) throw "Error en consulta de base de datos.";
-      if (rows.length == 1) {
-        let comparacion = bcryptjs.compareSync(usuario.clave, rows[0].clave);
-        if (comparacion) {
-          response.obj_usuario = rows[0];
-          //SE INVOCA AL PRÓXIMO CALLEABLE
-          next();
-        } else {
-          response.status(401).json({
-            exito: false,
-            mensaje: "Usuario y/o Contraseña incorrectos",
-            jwt: null,
-          });
-        }
-      } else {
-        response.status(401).json({
-          exito: false,
-          mensaje: "Usuario y/o Contraseña incorrectos",
-          jwt: null,
-        });
-      }
-    });
-  });
-});
+//   request.getConnection((err, conn) => {
+//     if (err) throw "Error al conectarse a la base de datos.";
+//     conn.query("SELECT * FROM usuarios WHERE nombre = ?", [usuario.nombre], (err, rows) => {
+//       if (err) throw "Error en consulta de base de datos.";
+//       if (rows.length == 1) {
+//         let comparacion = bcryptjs.compareSync(usuario.clave, rows[0].clave);
+//         if (comparacion) {
+//           response.obj_usuario = rows[0];
+//           //SE INVOCA AL PRÓXIMO CALLEABLE
+//           next();
+//         } else {
+//           response.status(401).json({
+//             exito: false,
+//             mensaje: "Usuario y/o Contraseña incorrectos",
+//             jwt: null,
+//           });
+//         }
+//       } else {
+//         response.status(401).json({
+//           exito: false,
+//           mensaje: "Usuario y/o Contraseña incorrectos",
+//           jwt: null,
+//         });
+//       }
+//     });
+//   });
+// });
 
-app.post("/login", verificar_usuario, (request, response) => {
-  //SE RECUPERA EL USUARIO DEL OBJETO DE LA RESPUESTA
-  const user = response.obj_usuario;
-  //SE CREA EL PAYLOAD CON LOS ATRIBUTOS QUE NECESITAMOS
-  const payload = {
-    usuario: {
-      nombre: user.nombre,
-      apellido: user.apellido,
-      perfil: user.perfil,
-    },
-    administrador: {
-      nombre: "Soledad",
-      apellido: "Quiroz",
-    },
-    app: "Gestor de Clientes",
-  };
-  //SE FIRMA EL TOKEN CON EL PAYLOAD Y LA CLAVE SECRETA
-  const token = jwt.sign(payload, app.get("key"), {
-    expiresIn: "520000m",
-  });
-  response.json({
-    exito: true,
-    mensaje: "JWT creado!!!",
-    jwt: token,
-  });
-});
+// app.post("/login", verificar_usuario, (request, response) => {
+//   //SE RECUPERA EL USUARIO DEL OBJETO DE LA RESPUESTA
+//   const user = response.obj_usuario;
+//   //SE CREA EL PAYLOAD CON LOS ATRIBUTOS QUE NECESITAMOS
+//   const payload = {
+//     usuario: {
+//       nombre: user.nombre,
+//       apellido: user.apellido,
+//       perfil: user.perfil,
+//     },
+//     administrador: {
+//       nombre: "Soledad",
+//       apellido: "Quiroz",
+//     },
+//     app: "Gestor de Clientes",
+//   };
+//   //SE FIRMA EL TOKEN CON EL PAYLOAD Y LA CLAVE SECRETA
+//   const token = jwt.sign(payload, app.get("key"), {
+//     expiresIn: "520000m",
+//   });
+//   response.json({
+//     exito: true,
+//     mensaje: "JWT creado!!!",
+//     jwt: token,
+//   });
+// });
 
 verificar_jwt.use((request, response, next) => {
   //SE RECUPERA EL TOKEN DEL ENCABEZADO DE LA PETICIÓN
@@ -151,42 +155,44 @@ verificar_jwt.use((request, response, next) => {
   }
 });
 
-app.get("/login", (request, response) => {
-  let obj_respuesta = {
-    exito: false,
-    mensaje: "El JWT es requerido!!!",
-    payload: null,
-    status: 403,
-  };
-  //SE RECUPERA EL TOKEN DEL ENCABEZADO DE LA PETICIÓN
-  let token = request.headers["x-access-token"] || request.headers["authorization"];
-  if (!token) {
-    response.status(obj_respuesta.status).json({
-      obj_respuesta,
-    });
-  }
-  if (token.startsWith("Bearer ")) {
-    token = token.slice(7, token.length);
-  }
-  if (token) {
-    //SE VERIFICA EL TOKEN CON LA CLAVE SECRETA
-    jwt.verify(token, app.get("key"), (error, decoded) => {
-      if (error) {
-        obj_respuesta.mensaje = "El JWT NO es válido!!!";
-        response.status(obj_respuesta.status).json(obj_respuesta);
-      } else {
-        obj_respuesta.exito = true;
-        obj_respuesta.mensaje = "El JWT es valido";
-        obj_respuesta.payload = decoded;
-        obj_respuesta.status = 200;
-        response.status(obj_respuesta.status).json(obj_respuesta);
-      }
-    });
-  }
-});
+// app.get("/login", (request, response) => {
+//   let obj_respuesta = {
+//     exito: false,
+//     mensaje: "El JWT es requerido!!!",
+//     payload: null,
+//     status: 403,
+//   };
+//   //SE RECUPERA EL TOKEN DEL ENCABEZADO DE LA PETICIÓN
+//   let token = request.headers["x-access-token"] || request.headers["authorization"];
+//   if (!token) {
+//     response.status(obj_respuesta.status).json({
+//       obj_respuesta,
+//     });
+//   }
+//   if (token.startsWith("Bearer ")) {
+//     token = token.slice(7, token.length);
+//   }
+//   if (token) {
+//     //SE VERIFICA EL TOKEN CON LA CLAVE SECRETA
+//     jwt.verify(token, app.get("key"), (error, decoded) => {
+//       if (error) {
+//         obj_respuesta.mensaje = "El JWT NO es válido!!!";
+//         response.status(obj_respuesta.status).json(obj_respuesta);
+//       } else {
+//         obj_respuesta.exito = true;
+//         obj_respuesta.mensaje = "El JWT es valido";
+//         obj_respuesta.payload = decoded;
+//         obj_respuesta.status = 200;
+//         response.status(obj_respuesta.status).json(obj_respuesta);
+//       }
+//     });
+//   }
+// });
+
 
 // CRUD CLIENTES **************************************************************************************
 // Agregar cliente
+
 app.post("/agregarCliente", verificar_jwt, (request, response) => {
   let obj_respuesta = {
     exito: false,

@@ -1,12 +1,19 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { createJWT, isTokenValid } = require("../utils/jwt");
-const createJWT = ({ payload }) => {
+
+const createJWT = (payload) => {
+    console.log("payload: ", payload);
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_LIFETIME,
   });
+  console.log("token: ", token);
+  return token;
 };
 
-const isTokenValid = ({ token }) => jwt.verify(token, process.env.JWT_SECRET);
+const isTokenValid = (token) => {
+  const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+  return decodedToken; 
+};
 
 module.exports = {
   createJWT,
