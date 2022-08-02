@@ -9,6 +9,7 @@ const createJWT = (payload) => {
 };
 
 const isTokenValid = (token) => {
+  console.log("token isTokenValid: ", token);
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
   return decodedToken; 
 };

@@ -1,4 +1,5 @@
 const bcryptjs = require("bcryptjs");
+const { isTokenValid } = require("../utils/jwt");
 
 const verificar_usuario = (req, res, next) => {
   let usuario = {};
@@ -34,6 +35,7 @@ const verificar_usuario = (req, res, next) => {
 
 const verificar_jwt = (req, res, next) => {
   let token = req.headers["x-access-token"] || req.headers["authorization"];
+  console.log("token verificar_jwt: ", token );
   if (!token) {
     res.status(401).send({
       error: "El JWT es requerido!!!",
