@@ -94,6 +94,7 @@ verificar_jwt.use((request, response, next) => {
   }
 });
 
+// CRUD CLIENTES **************************************************************************************
 app.post("/agregarCliente", verificar_jwt, (request, response) => {
   let obj_respuesta = {
     exito: false,

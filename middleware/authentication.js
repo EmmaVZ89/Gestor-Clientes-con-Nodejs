@@ -1,6 +1,4 @@
-// const mysql = require("mysql");
-// const myconn = require("express-myconnection");
-const bcryptjs = require("bcryptjs"); 
+const bcryptjs = require("bcryptjs");
 
 const verificar_usuario = (req, res, next) => {
   let usuario = {};
@@ -34,4 +32,28 @@ const verificar_usuario = (req, res, next) => {
   });
 };
 
-module.exports = { verificar_usuario };
+const verificar_jwt = (req, res, next) => {
+  let token = req.headers["x-access-token"] || req.headers["authorization"];
+  if (!token) {
+    res.status(401).send({
+      error: "El JWT es requerido!!!",
+    });
+    return;
+  }
+  if (token.startsWith("Bearer ")) {
+    token = token.slice(7, token.length);
+  }
+  if (token) {
+    const isVerifiedToken = isTokenValid(token);
+    if (!isVerifiedToken) {
+      return res.json({
+        exito: false,
+        mensaje: "El JWT NO es válido!!!",
+      });
+    }
+    res.jwt = isVerifiedToken;
+    next();
+  }
+};
+
+module.exports = { verificar_usuario, verificar_jwt };
