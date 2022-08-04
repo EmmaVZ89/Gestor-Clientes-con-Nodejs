@@ -55,63 +55,17 @@ app.use(express.static("public"));
 const { connectMySQL } = require("./db/connect");
 app.use(connectMySQL());
 
-//##############################################################################################//
-//RUTAS Y MIDDLEWATE PARA EL SERVIDOR DE AUTENTICACIÓN DE USUARIO Y JWT
-//##############################################################################################//
+// Routers
 const authRouter = require("./routes/authRoutes");
 const clienteRouter = require("./routes/clienteRoutes");
 
+// Routes
 app.use("/login", authRouter);
 app.use("/clientes", clienteRouter);
 
 // Middleware
 const { verificar_jwt } = require("./middleware/authentication");
 
-// CRUD CLIENTES **************************************************************************************
-
-// Eliminar cliente
-app.post("/eliminarCliente", verificar_jwt, (request, response) => {
-  let obj_respuesta = {
-    exito: false,
-    mensaje: "No se pudo eliminar el cliente",
-    status: 418,
-  };
-
-  let jwt = response.jwt;
-
-  let cliente_json = {};
-  cliente_json.id = request.body.id;
-
-  if (jwt.usuario.perfil !== "administrador") {
-    obj_respuesta.mensaje = "Usuario sin permisos!!";
-    obj_respuesta.status = 401;
-    response.status(obj_respuesta.status).json(obj_respuesta);
-  } else {
-    request.getConnection((err, conn) => {
-      if (err) throw "Error al conectarse a la base de datos.";
-      conn.query("DELETE FROM clientes WHERE id = ?", [cliente_json.id], (err, rows) => {
-        if (err) {
-          console.log(err);
-          throw "Error en consulta de base de datos.";
-        }
-      });
-    });
-
-    request.getConnection((err, conn) => {
-      if (err) throw "Error al conectarse a la base de datos.";
-      conn.query("DELETE FROM controles WHERE id = ?", [cliente_json.id], (err, rows) => {
-        if (err) {
-          console.log(err);
-          throw "Error en consulta de base de datos.";
-        }
-        obj_respuesta.exito = true;
-        obj_respuesta.mensaje = "Cliente Eliminado!";
-        obj_respuesta.status = 200;
-        response.status(obj_respuesta.status).json(obj_respuesta);
-      });
-    });
-  }
-});
 
 // CRUD CONTROLES **************************************************************************************
 // Agregar control

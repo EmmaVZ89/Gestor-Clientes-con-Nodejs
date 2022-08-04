@@ -146,4 +146,48 @@ const modificarCliente = async (req, res) => {
   }
 };
 
-module.exports = { listarClientes, agregarCliente, modificarCliente };
+const eliminarCliente = async (req, res) => {
+  let obj_respuesta = {
+    exito: false,
+    mensaje: "No se pudo eliminar el cliente",
+    status: 418,
+  };
+
+  let jwt = res.jwt;
+
+  let cliente_json = {};
+  cliente_json.id = req.body.id;
+
+  if (jwt.usuario.perfil !== "administrador") {
+    obj_respuesta.mensaje = "Usuario sin permisos!!";
+    obj_respuesta.status = 401;
+    res.status(obj_respuesta.status).json(obj_respuesta);
+  } else {
+    req.getConnection((err, conn) => {
+      if (err) throw "Error al conectarse a la base de datos.";
+      conn.query("DELETE FROM clientes WHERE id = ?", [cliente_json.id], (err, rows) => {
+        if (err) {
+          console.log(err);
+          throw "Error en consulta de base de datos.";
+        }
+      });
+    });
+
+    req.getConnection((err, conn) => {
+      if (err) throw "Error al conectarse a la base de datos.";
+      conn.query("DELETE FROM controles WHERE id = ?", [cliente_json.id], (err, rows) => {
+        if (err) {
+          console.log(err);
+          throw "Error en consulta de base de datos.";
+        }
+        obj_respuesta.exito = true;
+        obj_respuesta.mensaje = "Cliente Eliminado!";
+        obj_respuesta.status = 200;
+        res.status(obj_respuesta.status).json(obj_respuesta);
+      });
+    });
+  }
+};
+
+
+module.exports = { listarClientes, agregarCliente, modificarCliente, eliminarCliente };

@@ -498,7 +498,7 @@ async function deleteCliente(id) {
   let headers = { headers: { Authorization: "Bearer " + jwt } };
   try {
     resetForm();
-    const { data } = await axios.post(URL + "eliminarCliente", { id: id }, headers);
+    const { data } = await axios.post(URL + "clientes/eliminarCliente", { id: id }, headers);
     updateTable(listaClientes);
   } catch (error) {
     console.error(error);
