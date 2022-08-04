@@ -1,3 +1,4 @@
+
 const agregarCliente = async (req, res) => {
   let obj_respuesta = {
     exito: false,
@@ -26,7 +27,7 @@ const agregarCliente = async (req, res) => {
   if (jwt.usuario.perfil !== "administrador") {
     obj_respuesta.mensaje = "Usuario sin permisos!!";
     obj_respuesta.status = 401;
-    return res.status(obj_respuesta.status).json(obj_respuesta);
+    res.status(obj_respuesta.status).json(obj_respuesta);
   } else {
     req.getConnection((err, conn) => {
       if (err) throw "Error al conectarse a la base de datos.";
@@ -64,7 +65,7 @@ const listarClientes = async (req, res) => {
   };
 
   let jwt = res.jwt;
-  
+
   if (jwt.usuario.perfil !== "administrador") {
     obj_respuesta.mensaje = "Usuario sin permisos!!";
     obj_respuesta.status = 401;
@@ -89,7 +90,4 @@ const listarClientes = async (req, res) => {
   }
 };
 
-module.exports = {
-  agregarCliente,
-  listarClientes,
-};
+module.exports = { listarClientes, agregarCliente };

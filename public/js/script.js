@@ -456,7 +456,7 @@ async function getClientes() {
   let headers = { headers: { Authorization: "Bearer " + jwt } };
   $divSpinner.appendChild(getSpinner());
   try {
-    const { data } = await axios.get(URL + "listarClientes", headers);
+    const { data } = await axios.get(URL + "clientes/listarClientes", headers);
     return data.dato;
   } catch (error) {
     console.error(error);
@@ -470,7 +470,7 @@ async function createCliente(nuevoCliente) {
   let jwt = localStorage.getItem("jwt");
   let headers = { headers: { Authorization: "Bearer " + jwt } };
   try {
-    const { data } = await axios.post(URL + "agregarCliente", nuevoCliente, headers);
+    const { data } = await axios.post(URL + "clientes/agregarCliente", nuevoCliente, headers);
     updateTable(listaClientes);
     resetForm();
   } catch (error) {
