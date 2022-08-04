@@ -1,4 +1,3 @@
-
 const agregarCliente = async (req, res) => {
   let obj_respuesta = {
     exito: false,
@@ -90,4 +89,61 @@ const listarClientes = async (req, res) => {
   }
 };
 
-module.exports = { listarClientes, agregarCliente };
+const modificarCliente = async (req, res) => {
+  let obj_respuesta = {
+    exito: false,
+    mensaje: "No se pudo modificar el cliente",
+    status: 418,
+  };
+
+  let jwt = res.jwt;
+
+  let cliente_json = {};
+  cliente_json.id = req.body.id;
+  cliente_json.nombre = req.body.nombre;
+  cliente_json.dni = req.body.dni;
+  cliente_json.edad = req.body.edad;
+  cliente_json.altura = req.body.altura;
+  cliente_json.telefono = req.body.telefono;
+  cliente_json.facebook = req.body.facebook;
+  cliente_json.instagram = req.body.instagram;
+  cliente_json.direccion = req.body.direccion;
+  cliente_json.id_control = req.body.id;
+  cliente_json.estado = req.body.estado;
+
+  let control = req.body.control;
+
+  if (jwt.usuario.perfil !== "administrador") {
+    obj_respuesta.mensaje = "Usuario sin permisos!!";
+    obj_respuesta.status = 401;
+    res.status(obj_respuesta.status).json(obj_respuesta);
+  } else {
+    control.forEach((c) => {
+      req.getConnection((err, conn) => {
+        if (err) throw "Error al conectarse a la base de datos.";
+        conn.query("UPDATE controles SET ? WHERE id = ? AND fecha = ?", [c, c.id, c.fecha], (err, rows) => {
+          if (err) {
+            console.log(err);
+            throw "Error en consulta de base de datos.";
+          }
+        });
+      });
+    });
+
+    req.getConnection((err, conn) => {
+      if (err) throw "Error al conectarse a la base de datos.";
+      conn.query("UPDATE clientes SET ? WHERE id = ?", [cliente_json, cliente_json.id], (err, rows) => {
+        if (err) {
+          console.log(err);
+          throw "Error en consulta de base de datos.";
+        }
+        obj_respuesta.exito = true;
+        obj_respuesta.mensaje = "Cliente Modificado!";
+        obj_respuesta.status = 200;
+        res.status(obj_respuesta.status).json(obj_respuesta);
+      });
+    });
+  }
+};
+
+module.exports = { listarClientes, agregarCliente, modificarCliente };

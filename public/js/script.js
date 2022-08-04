@@ -484,7 +484,7 @@ async function updateCliente(clienteToEdit) {
   let headers = { headers: { Authorization: "Bearer " + jwt } };
   try {
     resetForm();
-    const { data } = await axios.post(URL + "modificarCliente", clienteToEdit, headers);
+    const { data } = await axios.post(URL + "clientes/modificarCliente", clienteToEdit, headers);
     updateTable(listaClientes);
     return data;
   } catch (error) {

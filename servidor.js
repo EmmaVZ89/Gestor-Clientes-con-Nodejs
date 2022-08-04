@@ -69,64 +69,6 @@ const { verificar_jwt } = require("./middleware/authentication");
 
 // CRUD CLIENTES **************************************************************************************
 
-// Modificar cliente
-app.post("/modificarCliente", verificar_jwt, (request, response) => {
-  let obj_respuesta = {
-    exito: false,
-    mensaje: "No se pudo modificar el cliente",
-    status: 418,
-  };
-
-  let jwt = response.jwt;
-
-  let cliente_json = {};
-  cliente_json.id = request.body.id;
-  cliente_json.nombre = request.body.nombre;
-  cliente_json.dni = request.body.dni;
-  cliente_json.edad = request.body.edad;
-  cliente_json.altura = request.body.altura;
-  cliente_json.telefono = request.body.telefono;
-  cliente_json.facebook = request.body.facebook;
-  cliente_json.instagram = request.body.instagram;
-  cliente_json.direccion = request.body.direccion;
-  cliente_json.id_control = request.body.id;
-  cliente_json.estado = request.body.estado;
-
-  let control = request.body.control;
-
-  if (jwt.usuario.perfil !== "administrador") {
-    obj_respuesta.mensaje = "Usuario sin permisos!!";
-    obj_respuesta.status = 401;
-    response.status(obj_respuesta.status).json(obj_respuesta);
-  } else {
-    control.forEach((c) => {
-      request.getConnection((err, conn) => {
-        if (err) throw "Error al conectarse a la base de datos.";
-        conn.query("UPDATE controles SET ? WHERE id = ? AND fecha = ?", [c, c.id, c.fecha], (err, rows) => {
-          if (err) {
-            console.log(err);
-            throw "Error en consulta de base de datos.";
-          }
-        });
-      });
-    });
-
-    request.getConnection((err, conn) => {
-      if (err) throw "Error al conectarse a la base de datos.";
-      conn.query("UPDATE clientes SET ? WHERE id = ?", [cliente_json, cliente_json.id], (err, rows) => {
-        if (err) {
-          console.log(err);
-          throw "Error en consulta de base de datos.";
-        }
-        obj_respuesta.exito = true;
-        obj_respuesta.mensaje = "Cliente Modificado!";
-        obj_respuesta.status = 200;
-        response.status(obj_respuesta.status).json(obj_respuesta);
-      });
-    });
-  }
-});
-
 // Eliminar cliente
 app.post("/eliminarCliente", verificar_jwt, (request, response) => {
   let obj_respuesta = {
