@@ -506,14 +506,12 @@ async function deleteCliente(id) {
   }
 }
 
-// CRUD CLIENTE **************************************************************************************
-
 // CRUD CONTROL **************************************************************************************
 async function createControl(nuevoControl) {
   let jwt = localStorage.getItem("jwt");
   let headers = { headers: { Authorization: "Bearer " + jwt } };
   try {
-    const { data } = await axios.post(URL + "agregarControl", nuevoControl, headers);
+    const { data } = await axios.post(URL + "controles/agregarControl", nuevoControl, headers);
   } catch (error) {
     console.error(error);
     logOutForced();
@@ -525,7 +523,7 @@ async function getControles() {
   let jwt = localStorage.getItem("jwt");
   let headers = { headers: { Authorization: "Bearer " + jwt } };
   try {
-    const { data } = await axios.get(URL + "listarControles", headers);
+    const { data } = await axios.get(URL + "controles/listarControles", headers);
     return data;
   } catch (error) {
     console.error(error);
@@ -539,7 +537,7 @@ async function deleteControl(control) {
   let jwt = localStorage.getItem("jwt");
   let headers = { headers: { Authorization: "Bearer " + jwt } };
   try {
-    const { data } = await axios.post(URL + "eliminarControl", control, headers);
+    const { data } = await axios.post(URL + "controles/eliminarControl", control, headers);
   } catch (error) {
     console.error(error);
     logOutForced();
