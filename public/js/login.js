@@ -21,46 +21,41 @@ const iniciarSesion = async (e) => {
   usuario.nombreUsuario = nombreUsuario;
   usuario.clave = clave;
 
-  if(validarCampos(nombreUsuario, clave)) {
+  if (validarCampos(nombreUsuario, clave)) {
     try {
       const { data } = await axios.post(URL + "login", usuario);
       if (data.exito) {
         localStorage.setItem("jwt", data.jwt);
-        swal("!Sesión Iniciada!", "Redirigiendo...", "success");
+        swal("¡ Sesión Iniciada !", "Redirigiendo...", "success");
         setTimeout(() => {
           $(location).attr("href", URL + "inicio");
         }, 2000);
       }
     } catch (error) {
       swal("¡ Inicio Fallido !", error.response.data.mensaje, "error");
-    }  
+    }
   } else {
     swal("¡ Campos vacios !", "Debe completar ambos campos", "error");
   }
 };
 
-function verificarSesionIniciada() {
-  var jwt = localStorage.getItem("jwt");
-  $.ajax({
-    type: "GET",
-    url: URL + "login",
-    dataType: "json",
-    data: {},
-    headers: { Authorization: "Bearer " + jwt },
-    async: true,
-  })
-    .done(function (obj_rta) {
-      if (obj_rta.exito) {
-        swal("!Sesión Iniciada!", "Redirigiendo...", "success");
+const verificarSesionIniciada = async () => {
+  const jwt = localStorage.getItem("jwt");
+  if(jwt !== null) {
+    const headers = { headers: { Authorization: "Bearer " + jwt } };
+    try {
+      const { data } = await axios.get(URL + "login", headers);
+      if(data.exito) {
+        swal("¡ Sesión Iniciada !", "Redirigiendo...", "success");
         setTimeout(() => {
           $(location).attr("href", URL + "inicio");
         }, 1000);
       }
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      var retorno = JSON.parse(jqXHR.responseText);
-    });
-}
+    } catch (error) {
+      console.log(error);
+    }  
+  }
+};
 
 const validarCampos = (nombre, clave) => {
   let retorno = true;

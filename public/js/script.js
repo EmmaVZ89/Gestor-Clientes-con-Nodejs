@@ -9,8 +9,6 @@ import {
 
 const URL = "http://localhost:2022/";
 
-VerificarJWT();
-
 const $divSpinner = document.getElementById("spinner");
 
 let listaClientes = await getClientes();
@@ -818,43 +816,31 @@ function clearDivSpinner() {
 }
 
 // JWT y login***********************************************************************
-function VerificarJWT() {
-  var jwt = localStorage.getItem("jwt");
-  $.ajax({
-    type: "GET",
-    url: URL + "login",
-    dataType: "json",
-    data: {},
-    headers: { Authorization: "Bearer " + jwt },
-    async: true,
-  })
-    .done(function (obj_rta) {
-      if (obj_rta.exito) {
+const VerificarJWT = async () => {
+  const jwt = localStorage.getItem("jwt");
+  if (jwt !== null) {
+    const headers = { headers: { Authorization: "Bearer " + jwt } };
+    try {
+      const { data } = await axios.get(URL + "login", headers);
+      if (data.exito) {
         const foto = document.querySelector("#foto-usuario");
         const nombre = document.querySelector("#nombre-usuario");
-        let nombreUsuario = obj_rta.payload.usuario.nombre;
+        let nombreUsuario = data.payload.usuario.nombre;
         if (nombreUsuario === "soledad") {
           foto.setAttribute("src", "./assets/soledad.png");
           nombre.innerText = nombreUsuario[0].toUpperCase() + nombreUsuario.slice(1).toLowerCase();
         }
         swal("¡ Bienvenido !", "Tu sesión esta iniciada", "success");
-      } else {
-        swal("¡ Inicio Fallido !", "Debes iniciar sesión para continuar", "error");
-        setTimeout(() => {
-          $(location).attr("href", URL);
-        }, 1000);
       }
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      var retorno = JSON.parse(jqXHR.responseText);
-      if (retorno.exito == false) {
-        swal("¡ Inicio Fallido !", "Debes iniciar sesión para continuar", "error");
-        setTimeout(() => {
-          $(location).attr("href", URL);
-        }, 1000);
-      }
-    });
-}
+    } catch (error) {
+      console.log(error);
+      swal("¡ Inicio Fallido !", "Debes iniciar sesión para continuar", "error");
+      setTimeout(() => {
+        $(location).attr("href", URL);
+      }, 1000);
+    }
+  }
+};
 
 function logOut() {
   localStorage.removeItem("jwt");
@@ -902,5 +888,7 @@ function paginarTabla() {
     });
   });
 }
+
+await VerificarJWT();
 
 export { updateTable, resetForm };

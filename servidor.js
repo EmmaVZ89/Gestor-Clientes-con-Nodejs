@@ -34,7 +34,6 @@ app.use("/controles", controlRouter);
 const port = process.env.PORT || 2022;
 const start = async () => {
   try {
-    //
     app.listen(port, () => {
       console.log(`Servidor corriendo sobre puerto: ${port}`);
     });
