@@ -89,6 +89,53 @@ const listarClientes = async (req, res) => {
   }
 };
 
+const traerCliente = async (req, res) => {
+  let obj_respuesta = {
+    exito: false,
+    mensaje: "No se pudo encontrar el cliente",
+    dato: [],
+    status: 418,
+  };
+
+  const jwt = res.jwt;
+  const { id: idCliente } = req.params;
+  let cliente = {};
+  cliente.control = [];
+
+  if (jwt.usuario.perfil !== "administrador") {
+    obj_respuesta.mensaje = "Usuario sin permisos!!";
+    obj_respuesta.status = 401;
+    return res.status(obj_respuesta.status).json(obj_respuesta);
+  } else {
+    req.getConnection((err, conn) => {
+      if (err) throw "Error al conectarse a la base de datos.";
+      conn.query("SELECT * FROM clientes WHERE id = ?", [idCliente], (err, rows) => {
+        if (err) {
+          console.log(err);
+          throw "Error en consulta de base de datos.";
+        }
+        cliente = rows[0];
+      });
+    });
+
+    req.getConnection((err, conn) => {
+      if (err) throw "Error al conectarse a la base de datos.";
+      conn.query("SELECT * FROM controles WHERE id = ?", [idCliente], (err, rows) => {
+        if (err) {
+          console.log(err);
+          throw "Error en consulta de base de datos.";
+        }
+        cliente.control = [...rows];
+        obj_respuesta.exito = true; 
+        obj_respuesta.mensaje = "Cliente Eliminado!";
+        obj_respuesta.dato = cliente;
+        obj_respuesta.status = 200;
+        res.status(obj_respuesta.status).json(obj_respuesta);
+      });
+    });
+  }
+};
+
 const modificarCliente = async (req, res) => {
   let obj_respuesta = {
     exito: false,
@@ -189,5 +236,4 @@ const eliminarCliente = async (req, res) => {
   }
 };
 
-
-module.exports = { listarClientes, agregarCliente, modificarCliente, eliminarCliente };
+module.exports = { listarClientes, traerCliente, agregarCliente, modificarCliente, eliminarCliente };

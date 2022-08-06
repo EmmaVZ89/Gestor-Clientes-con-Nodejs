@@ -213,28 +213,24 @@ $btnControlCancel.addEventListener("click", () => {
 
 // EVENTOS PANTALLA Y FORMULARIOS --------------------------------------------------------------------
 let flagDesactivar = false;
-window.addEventListener("click", (e) => {
-  if (e.target.matches("td")) {
+window.addEventListener("click", async (event) => {
+  if (event.target.matches("td")) {
     flagDesactivar = false;
     $btnModificar.disabled = false;
     $btnDelete.disabled = false;
     $btnFicha.disabled = false;
-    let id = e.target.parentElement.dataset.id;
-    cliente = listaClientes.find((c) => c.id.toString() === id);
-    controles = listaControles.filter((control) => {
-      return control.id == cliente.id;
-    });
-    cliente.control = controles;
+    const idCliente = event.target.parentElement.dataset.id;
+    cliente = await getCliente(idCliente);
     uploadFormCRUD(cliente);
     uploadFormControl(cliente);
     swal("! Ficha cargada !", `Se cargo a ${cliente.nombre} con exito`, "success");
   }
 
-  if (e.target.matches("button")) {
-    let id = e.target.dataset.id;
-    let index = listaClientes.findIndex((c) => c.id == id);
+  if (event.target.matches("button")) {
+    const idCliente = event.target.dataset.id;
+    const index = listaClientes.findIndex((c) => c.id == idCliente);
     if (index != -1) {
-      activarDesactivarCliente(id);
+      activarDesactivarCliente(idCliente);
     }
   }
 });
@@ -313,8 +309,8 @@ $formularioCRUD.addEventListener("submit", (e) => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
+    }).then((willUpdateEstado) => {
+      if (willUpdateEstado) {
         if (!flagDesactivar) {
           clienteCRUD.estado = 1;
         }
@@ -337,8 +333,8 @@ $formularioCRUD.addEventListener("submit", (e) => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
+    }).then((willUpdateEstado) => {
+      if (willUpdateEstado) {
         deleteCliente(parseInt($formularioCRUD.numeroCliente.value));
         swal("¡ Eliminado !", `El cliente fue eliminado`, "success");
       } else {
@@ -395,8 +391,8 @@ $formularioControl.addEventListener("submit", (e) => {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
+      }).then((willUpdateEstado) => {
+        if (willUpdateEstado) {
           let indexControl = listaControles.findIndex((c) => c.id == control.id && c.fecha == control.fecha);
           listaControles[indexControl] = control;
           cliente.control[index] = control;
@@ -418,8 +414,8 @@ $formularioControl.addEventListener("submit", (e) => {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
+      }).then((willUpdateEstado) => {
+        if (willUpdateEstado) {
           let controlToDelete = cliente.control[index];
           let indexControl = listaControles.findIndex((c) => c.id == control.id && c.fecha == control.fecha);
           cliente.control.splice(index, 1);
@@ -463,6 +459,21 @@ async function getClientes() {
     clearDivSpinner();
   }
 }
+
+const getCliente = async (id) => {
+  let jwt = localStorage.getItem("jwt");
+  let headers = { headers: { Authorization: "Bearer " + jwt } };
+  $divSpinner.appendChild(getSpinner());
+  try {
+    const { data } = await axios.get(URL + "clientes/traerCliente/" + id, headers);
+    return data.dato;
+  } catch (error) {
+    console.error(error);
+    logOutForced();
+  } finally {
+    clearDivSpinner();
+  }
+};
 
 async function createCliente(nuevoCliente) {
   let jwt = localStorage.getItem("jwt");
@@ -685,8 +696,8 @@ function resetColors() {
   });
 }
 
-function activarDesactivarCliente(id) {
-  cliente = listaClientes.find((c) => c.id.toString() === id);
+async function activarDesactivarCliente(id) {
+  const cliente = await getCliente(id);
   let accion = "activar";
   let mensaje = "activado";
   if (cliente.estado) {
@@ -699,12 +710,8 @@ function activarDesactivarCliente(id) {
     icon: "warning",
     buttons: true,
     dangerMode: true,
-  }).then((willDelete) => {
-    if (willDelete) {
-      controles = listaControles.filter((control) => {
-        return control.id == cliente.id;
-      });
-      cliente.control = controles;
+  }).then((willUpdateEstado) => {
+    if (willUpdateEstado) {
       if (cliente.estado) {
         cliente.estado = 0;
       } else {
@@ -842,21 +849,21 @@ const VerificarJWT = async () => {
   }
 };
 
-function logOut() {
+const logOut = () => {
   localStorage.removeItem("jwt");
   swal("¡ Sesión cerrada !", "Redirigiendo...", "success");
   setTimeout(() => {
     $(location).attr("href", URL);
   }, 2000);
-}
+};
 
-function logOutForced() {
+const logOutForced = () => {
   localStorage.removeItem("jwt");
   swal("¡ Inicio Fallido !", "Debes iniciar sesión para continuar", "error");
   setTimeout(() => {
     $(location).attr("href", URL);
   }, 2000);
-}
+};
 
 // Paginación
 function paginarTabla() {
