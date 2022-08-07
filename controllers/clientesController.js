@@ -125,8 +125,10 @@ const traerCliente = async (req, res) => {
           console.log(err);
           throw "Error en consulta de base de datos.";
         }
-        cliente.control = [...rows];
-        obj_respuesta.exito = true; 
+        if (cliente !== undefined) {
+          cliente.control = [...rows];
+        }
+        obj_respuesta.exito = true;
         obj_respuesta.mensaje = "Cliente Eliminado!";
         obj_respuesta.dato = cliente;
         obj_respuesta.status = 200;

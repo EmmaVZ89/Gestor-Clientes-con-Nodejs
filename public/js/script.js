@@ -228,14 +228,14 @@ window.addEventListener("click", async (event) => {
 
   if (event.target.matches("button")) {
     const idCliente = event.target.dataset.id;
-    const index = listaClientes.findIndex((c) => c.id == idCliente);
-    if (index != -1) {
+    const cliente = getCliente(idCliente);
+    if (cliente) {
       activarDesactivarCliente(idCliente);
     }
   }
 });
 
-$formularioCRUD.addEventListener("submit", (e) => {
+$formularioCRUD.addEventListener("submit", async (e) => {
   e.preventDefault();
   const {
     numeroCliente,
@@ -271,18 +271,6 @@ $formularioCRUD.addEventListener("submit", (e) => {
     objetivo.value
   );
 
-  if ($btnForm.innerHTML !== "Eliminar") {
-    if ($btnForm.innerHTML === "Guardar") {
-      controles = [];
-    }
-    if (!controles.length) {
-      controles.push(control);
-    } else {
-      controles.shift();
-      controles.unshift(control);
-    }
-  }
-
   const clienteCRUD = new Cliente(
     numeroCliente.value,
     numeroCliente.value,
@@ -293,15 +281,18 @@ $formularioCRUD.addEventListener("submit", (e) => {
     telefono.value,
     facebook.value,
     instagram.value,
-    direccion.value,
-    controles
+    direccion.value
   );
 
-  if (!lookForClient(listaClientes, numeroCliente.value) && $btnForm.innerHTML === "Guardar") {
-    clienteCRUD.estado = 1;
-    listaControles.push(control);
-    createCliente(clienteCRUD);
-    swal("¡ Agregado !", `El cliente fue agregado`, "success");
+  if ($btnForm.innerHTML === "Guardar") {
+    if (!(await getCliente(numeroCliente.value))) {
+      clienteCRUD.estado = 1;
+      clienteCRUD.control = [control];
+      createCliente(clienteCRUD);
+      swal("¡ Agregado !", `El cliente fue agregado`, "success");
+    } else {
+      swal("¡ Número Exitente !", `El número de cliente ya existe`, "error");
+    }
   } else if ($btnForm.innerHTML === "Modificar") {
     swal({
       title: `¿Desea modificar a ${cliente.nombre}?`,
@@ -309,19 +300,16 @@ $formularioCRUD.addEventListener("submit", (e) => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willUpdateEstado) => {
-      if (willUpdateEstado) {
-        if (!flagDesactivar) {
-          clienteCRUD.estado = 1;
-        }
-        let index = listaClientes.findIndex((c) => c.id == clienteCRUD.id);
-        let indexControl = listaControles.findIndex(
-          (c) => c.id == clienteCRUD.id && c.fecha == clienteCRUD.control[0].fecha
-        );
-        listaControles[indexControl] = clienteCRUD.control[0];
-        listaClientes[index] = clienteCRUD;
-        updateCliente(clienteCRUD);
-        swal("¡ Modificado !", `El cliente fue modificado`, "success");
+    }).then((willUpdateCliente) => {
+      if (willUpdateCliente) {
+        getCliente(numeroCliente.value).then((clienteAModificar) => {
+          clienteCRUD.control = clienteAModificar.control;
+          clienteCRUD.control[0] = control;
+          updateCliente(clienteCRUD);
+          swal("¡ Modificado !", `El cliente fue modificado`, "success");
+        }).catch((error)=>{
+          console.error(error);
+        });
       } else {
         swal("No se realizó ninguna modificación!");
       }
@@ -333,8 +321,8 @@ $formularioCRUD.addEventListener("submit", (e) => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willUpdateEstado) => {
-      if (willUpdateEstado) {
+    }).then((willDeleteCliente) => {
+      if (willDeleteCliente) {
         deleteCliente(parseInt($formularioCRUD.numeroCliente.value));
         swal("¡ Eliminado !", `El cliente fue eliminado`, "success");
       } else {
@@ -343,7 +331,6 @@ $formularioCRUD.addEventListener("submit", (e) => {
     });
   }
   $("#miModal").modal("hide");
-  controles = [];
 });
 
 $formularioControl.addEventListener("submit", (e) => {
@@ -696,7 +683,7 @@ function resetColors() {
   });
 }
 
-async function activarDesactivarCliente(id) {
+const activarDesactivarCliente = async (id) => {
   const cliente = await getCliente(id);
   let accion = "activar";
   let mensaje = "activado";
@@ -723,7 +710,7 @@ async function activarDesactivarCliente(id) {
       swal("No se realizó ningún cambio!");
     }
   });
-}
+};
 
 function disableInputsCrud() {
   const {
